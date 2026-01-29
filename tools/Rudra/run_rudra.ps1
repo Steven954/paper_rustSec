@@ -4,7 +4,7 @@
 )
 
 $root = Split-Path -Parent $PSCommandPath
-$casesRoot = Join-Path $root 'cases'
+$casesRoot = Join-Path $root 'tests'
 $target = Join-Path $casesRoot $Case
 
 if (-not (Test-Path $target)) {
