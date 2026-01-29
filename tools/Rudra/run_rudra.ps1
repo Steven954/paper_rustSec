@@ -4,13 +4,50 @@
 )
 
 $root = Split-Path -Parent $PSCommandPath
-$casesRoot = Join-Path $root 'tests'
-$target = Join-Path $casesRoot $Case
+$testsRoot = Join-Path $root 'tests'
+$casesRoot = Join-Path $root 'cases'
+$caseRel = $Case -replace '/', '\'
 
-if (-not (Test-Path $target)) {
+function Resolve-TargetPath {
+  param([string]$inputPath)
+
+  if ([System.IO.Path]::IsPathRooted($inputPath)) {
+    if (Test-Path $inputPath) { return (Resolve-Path $inputPath).Path }
+    if (-not $inputPath.EndsWith('.rs')) {
+      $rsPath = "$inputPath.rs"
+      if (Test-Path $rsPath) { return (Resolve-Path $rsPath).Path }
+    }
+    return $null
+  }
+
+  if ($inputPath.StartsWith('tests\') -or $inputPath.StartsWith('cases\')) {
+    $relPath = Join-Path $root $inputPath
+    if (Test-Path $relPath) { return (Resolve-Path $relPath).Path }
+    if (-not $inputPath.EndsWith('.rs')) {
+      $rsRelPath = "$relPath.rs"
+      if (Test-Path $rsRelPath) { return (Resolve-Path $rsRelPath).Path }
+    }
+    return $null
+  }
+
+  $candidate = Join-Path $testsRoot $inputPath
+  if (Test-Path $candidate) { return (Resolve-Path $candidate).Path }
+  if (-not $inputPath.EndsWith('.rs')) {
+    $rsCandidate = "$candidate.rs"
+    if (Test-Path $rsCandidate) { return (Resolve-Path $rsCandidate).Path }
+  }
+
+  $fallback = Join-Path $casesRoot $inputPath
+  if (Test-Path $fallback) { return (Resolve-Path $fallback).Path }
+  return $null
+}
+
+$targetPath = Resolve-TargetPath -inputPath $caseRel
+if (-not $targetPath) {
   Write-Host "Case not found: $Case" -ForegroundColor Red
-  Write-Host 'Available cases:'
-  Get-ChildItem -Path $casesRoot -Directory | ForEach-Object { "  - $($_.Name)" }
+  Write-Host 'Available test groups (tests/*):'
+  Get-ChildItem -Path $testsRoot -Directory | ForEach-Object { "  - $($_.Name)" }
+  Write-Host 'Tip: use path like "panic_safety/order_safe_if" (with or without .rs)'
   exit 1
 }
 
@@ -56,10 +93,37 @@ try {
 
 $env:RUDRA_RUNNER_HOME = $rudraHome
 
+$relPath = [System.IO.Path]::GetRelativePath($root, $targetPath)
+$relPathLinux = $relPath -replace '\\', '/'
+$containerRepo = '/tmp/rudra-repo'
+$containerTarget = "$containerRepo/$relPathLinux"
+if (Test-Path -Path $targetPath -PathType Leaf) {
+  $relDir = [System.IO.Path]::GetDirectoryName($relPath)
+  if ([string]::IsNullOrEmpty($relDir)) {
+    $workDir = $containerRepo
+  } else {
+    $workDir = "$containerRepo/$($relDir -replace '\\', '/')"
+  }
+} else {
+  $workDir = $containerTarget
+}
+
+if (Test-Path -Path $targetPath -PathType Leaf) {
+  $runCmd = @(
+    'rudra',
+    '-Zrudra-enable-unsafe-destructor',
+    '--crate-type',
+    'lib',
+    $containerTarget
+  )
+} else {
+  $runCmd = @('cargo', 'rudra')
+}
+
 docker run -t --rm `
   -v "$env:RUDRA_RUNNER_HOME:/tmp/rudra-runner-home" `
   --env CARGO_HOME=/tmp/rudra-runner-home/cargo_home `
   --env SCCACHE_DIR=/tmp/rudra-runner-home/sccache_home `
   --env SCCACHE_CACHE_SIZE=10T `
   --env RUSTUP_TOOLCHAIN=nightly-2021-10-21 `
-  -v "${target}:/tmp/rudra" -w /tmp/rudra $img cargo rudra
+  -v "${root}:/tmp/rudra-repo" -w $workDir $img @runCmd
