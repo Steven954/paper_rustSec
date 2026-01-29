@@ -54,6 +54,30 @@ if (-not $targetPath) {
 $rudraHome = Join-Path $root 'rudra-home'
 New-Item -ItemType Directory -Force -Path $rudraHome | Out-Null
 
+function Get-RelativePath {
+  param(
+    [Parameter(Mandatory = $true)][string]$BasePath,
+    [Parameter(Mandatory = $true)][string]$TargetPath
+  )
+
+  $baseFull = (Resolve-Path $BasePath).Path
+  $targetFull = (Resolve-Path $TargetPath).Path
+
+  if (-not $baseFull.EndsWith('\')) {
+    $baseFull += '\'
+  }
+
+  $baseUri = [Uri]::new($baseFull)
+  $targetUri = [Uri]::new($targetFull)
+  if ($baseUri.Scheme -ne $targetUri.Scheme) {
+    return $targetFull
+  }
+
+  $relUri = $baseUri.MakeRelativeUri($targetUri)
+  $rel = [Uri]::UnescapeDataString($relUri.ToString())
+  return ($rel -replace '/', '\')
+}
+
 function Ensure-DockerReady {
   try {
     docker info > $null
@@ -93,7 +117,7 @@ try {
 
 $env:RUDRA_RUNNER_HOME = $rudraHome
 
-$relPath = [System.IO.Path]::GetRelativePath($root, $targetPath)
+$relPath = Get-RelativePath -BasePath $root -TargetPath $targetPath
 $relPathLinux = $relPath -replace '\\', '/'
 $containerRepo = '/tmp/rudra-repo'
 $containerTarget = "$containerRepo/$relPathLinux"
