@@ -112,7 +112,8 @@ $img = 'rudra:latest'
 try {
   docker image inspect $img > $null
 } catch {
-  docker build $root -t $img
+  Write-Error "Image '$img' not found. Please run build_rudra.ps1 first."
+  exit 1
 }
 
 $env:RUDRA_RUNNER_HOME = $rudraHome

@@ -4,8 +4,6 @@ param(
 
   [ValidateSet('low', 'mid', 'high')]
   [string]$Precision = 'low',
-
-  [switch]$SkipBuild
 )
 
 $root = Split-Path -Parent $PSCommandPath
@@ -82,23 +80,11 @@ if (-not $targetPath) {
 Ensure-DockerReady
 
 $image = 'ffi-checker:latest'
-$built = $false
-if (-not $SkipBuild) {
-  try {
-    docker build $root -t $image
-    $built = $true
-  } catch {
-    Write-Warning "docker build failed ($($_.Exception.Message)). Will try existing image if present."
-  }
-}
-
-if (-not $built) {
-  try {
-    docker image inspect $image > $null
-  } catch {
-    Write-Error "Image '$image' not found and build failed. Re-run without -SkipBuild after fixing the network/mirror."
-    exit 1
-  }
+try {
+  docker image inspect $image > $null
+} catch {
+  Write-Error "Image '$image' not found. Please run build_ffi_checker.ps1 first."
+  exit 1
 }
 
 $containerRoot = '/workspace'
