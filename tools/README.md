@@ -1,6 +1,6 @@
 # tools 使用手册（Docker）
 
-本目录包含 Rudra、FFIChecker、MirChecker 的 Docker 构建/启动脚本，以及一键检测脚本。
+本目录包含 Rudra、FFIChecker、MirChecker、SafeDrop 的 Docker 构建/启动脚本，以及一键检测脚本。
 
 ## 通用：如何启动 Docker
 
@@ -87,6 +87,30 @@ cd D:\毕业论文\paper_rustSec\tools\mirchecker
 # 以单个 .rs 文件为目标
 .\run_mir_checker_file.ps1 -Target tests\safe-bugs\division-by-zero\src\main.rs -Domain interval -Entry main
 ```
+
+## SafeDrop
+
+### 构建镜像
+```powershell
+cd D:\毕业论文\paper_rustSec\tools\safeDrop
+.\build_safedrop.ps1
+```
+
+### 运行容器（交互式）
+```powershell
+.\run_safedrop_docker.ps1
+```
+
+### 一键检测（支持单文件或 Cargo 项目）
+```powershell
+# 单个 .rs 文件
+.\run_safedrop.ps1 -Target D:\path\to\test.rs
+
+# Cargo 项目目录
+.\run_safedrop.ps1 -Target D:\path\to\cargo\project
+```
+
+首次运行会自动拉取 Rust 1.63.0 源码并构建 stage1 rustc，时间较长。
 
 ## 常见问题
 
