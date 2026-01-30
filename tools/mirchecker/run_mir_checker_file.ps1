@@ -106,6 +106,22 @@ try {
   exit 1
 }
 
+$cargoHome = Join-Path $root '.cargo-home'
+$cargoConfig = Join-Path $cargoHome 'config.toml'
+if (-not (Test-Path $cargoConfig)) {
+  New-Item -ItemType Directory -Force -Path $cargoHome | Out-Null
+  @'
+[source.crates-io]
+replace-with = "ustc"
+
+[source.ustc]
+registry = "https://mirrors.ustc.edu.cn/crates.io-index"
+
+[net]
+git-fetch-with-cli = true
+'@ | Set-Content -Path $cargoConfig -NoNewline
+}
+
 $containerRoot = '/workspace'
 $relPath = Get-RelativePath -BasePath $root -TargetPath $targetPath
 $relPathLinux = $relPath -replace '\\', '/'
@@ -134,7 +150,26 @@ $argsStr = ($args | ForEach-Object { $_ }) -join ' '
 $containerTarget = "$containerRoot/$relPathLinux"
 $runCmd = "/workspace/target/debug/mir-checker '$containerTarget' $argsStr"
 
-$bashCmd = "set -e; export PATH=/opt/llvm15/bin:`$PATH; export LIBCLANG_PATH=/opt/llvm15/lib/libclang.so; export RUSTFLAGS='-Clink-args=-fuse-ld=lld'; cd /workspace && cargo build --bin cargo-mir-checker --bin mir-checker; cd '$workdir'; $runCmd"
+$bashCmdTemplate = @'
+set -e
+export PATH=/opt/llvm15/bin:$PATH
+export LIBCLANG_PATH=/opt/llvm15/lib/libclang.so
+export RUSTFLAGS="-Clink-args=-fuse-ld=lld"
+export CARGO_HOME=/workspace/.cargo-home
+mkdir -p $CARGO_HOME
+test -f $CARGO_HOME/config.toml
+git config --global url."https://mirrors.ustc.edu.cn/crates.io-index".insteadOf https://github.com/rust-lang/crates.io-index
+if [ -f /workspace/apron-sys/apron/configure ]; then
+  sed -i 's/\r$//' /workspace/apron-sys/apron/configure
+  chmod +x /workspace/apron-sys/apron/configure
+fi
+cd /workspace
+cargo build --bin cargo-mir-checker --bin mir-checker
+export LD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$LD_LIBRARY_PATH
+cd "{0}"
+{1}
+'@
+$bashCmd = $bashCmdTemplate -f $workdir, $runCmd
 
 docker run -t --rm `
   --entrypoint /bin/bash `

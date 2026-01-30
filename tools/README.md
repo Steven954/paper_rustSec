@@ -13,6 +13,17 @@ docker info
 
 如果能输出 Client/Server 信息，说明 Docker 已就绪。
 
+## 通用：查看当前已启动的 Docker 容器
+
+```powershell
+docker ps
+```
+
+只看名称、镜像和状态：
+```powershell
+docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}"
+```
+
 ## Rudra
 
 ### 构建镜像

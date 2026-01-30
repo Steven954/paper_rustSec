@@ -9,3 +9,5 @@ scripts/real-world-crates/**/
 scripts/operating-systems
 scripts/evaluations/**/
 main
+.cargo-home/
+apron-sys/apron/apron/ap_version.h
