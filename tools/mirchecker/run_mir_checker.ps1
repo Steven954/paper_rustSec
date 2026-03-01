@@ -176,7 +176,7 @@ export LD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$LD_LIBRARY_PATH
 cd "{0}"
 {1}
 '@
-$bashCmd = $bashCmdTemplate -f $workdir, $runCmd
+$bashCmd = ($bashCmdTemplate -f $workdir, $runCmd) -replace "`r", ""
 
 docker run -t --rm `
   --entrypoint /bin/bash `

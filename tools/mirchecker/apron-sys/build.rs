@@ -2,7 +2,7 @@ extern crate bindgen;
 extern crate cc;
 
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::process::Command;
 
 fn main() {
@@ -168,20 +168,33 @@ fn main() {
         .file("apron/itv/itv_linexpr.c")
         .compile("apron_itv_mpfr");
 
-    // Apron octagons MPQ
-    builder
-        .clone()
-        .flag("-DNUM_MPQ")
-        .file("apron/octagons/oct_representation.c")
-        .file("apron/octagons/oct_nary.c")
-        .file("apron/octagons/oct_transfer.c")
-        .file("apron/octagons/oct_print.c")
-        .file("apron/octagons/oct_resize.c")
-        .file("apron/octagons/oct_predicate.c")
-        // // .file("apron/octagons/oct_test.c")
-        .file("apron/octagons/oct_hmat.c")
-        .file("apron/octagons/oct_closure.c")
-        .compile("apron_oct_mpq");
+    // Some snapshots miss apron/octagons/*.c; skip octagons in that case.
+    let octagon_sources = [
+        "apron/octagons/oct_representation.c",
+        "apron/octagons/oct_nary.c",
+        "apron/octagons/oct_transfer.c",
+        "apron/octagons/oct_print.c",
+        "apron/octagons/oct_resize.c",
+        "apron/octagons/oct_predicate.c",
+        "apron/octagons/oct_hmat.c",
+        "apron/octagons/oct_closure.c",
+    ];
+    let has_octagons = octagon_sources.iter().all(|p| Path::new(p).exists());
+    if has_octagons {
+        let mut oct_builder = builder.clone();
+        oct_builder.flag("-DNUM_MPQ");
+        for src in octagon_sources.iter() {
+            oct_builder.file(src);
+        }
+        oct_builder.compile("apron_oct_mpq");
+    } else {
+        println!("cargo:warning=apron octagons sources not found; skipping octagons backend");
+        builder
+            .clone()
+            .flag("-DNUM_MPQ")
+            .file("src/octagon_stubs.c")
+            .compile("apron_oct_mpq");
+    }
 
     // Apron newpolka MPQ
     builder

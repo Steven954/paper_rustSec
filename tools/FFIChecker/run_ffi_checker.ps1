@@ -3,7 +3,7 @@ param(
   [string]$Target = 'examples/rust-uaf-df',
 
   [ValidateSet('low', 'mid', 'high')]
-  [string]$Precision = 'low',
+  [string]$Precision = 'low'
 )
 
 $root = Split-Path -Parent $PSCommandPath
