@@ -1,0 +1,29 @@
+case_id: trophy-case__qrcode-generator-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 38.189262
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:13:37.682064 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:13:55.236959 |INFO | [rudra-progress] Running rudra for target bin:qrcode-generator-test
+[0m[1m[33mwarning[0m[0m[1m: unused `std::result::Result` that must be used[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:8:5[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m8[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    to_image_from_str("hello", QrCodeEcc::Low, std::usize::MAX);[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m    [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_must_use)]` on by default[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this `Result` may be an `Err` variant, which should be handled[0m
+
+2026-03-01 14:14:14.690604 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:14:14.690861 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:14:14.691387 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:14:14.691398 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:14:14.691434 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:14:14.691438 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:14:14.740487 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

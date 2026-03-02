@@ -1,0 +1,21 @@
+case_id: examples__side-effects-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 7.059511
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:01:17.934646 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:01:18.429040 |INFO | [rudra-progress] Running rudra for target bin:side-effects-test
+2026-03-01 14:01:23.779845 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:01:23.780097 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:01:23.780282 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:01:23.780288 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:01:23.781164 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:01:23.781190 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:01:23.822192 |WARN | [cargo_rudra] Target custom-build:build-script-build is not supported
+2026-03-01 14:01:23.822226 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

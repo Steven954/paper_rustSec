@@ -1,4 +1,4 @@
-﻿param(
+param(
   [Parameter(Mandatory = $true, Position = 0)]
   [string]$Case
 )
@@ -51,6 +51,22 @@ if (-not $targetPath) {
   exit 1
 }
 
+# 与 MirChecker 一致：CARGO_HOME 放在 workspace 内，避免单独 mount 导致的路径/缓存问题
+$cargoHome = Join-Path $root '.cargo-home'
+$cargoConfig = Join-Path $cargoHome 'config.toml'
+if (-not (Test-Path $cargoConfig)) {
+  New-Item -ItemType Directory -Force -Path $cargoHome | Out-Null
+  @'
+[source.crates-io]
+replace-with = "ustc"
+
+[source.ustc]
+registry = "https://mirrors.ustc.edu.cn/crates.io-index"
+
+[net]
+git-fetch-with-cli = true
+'@ | Set-Content -Path $cargoConfig -NoNewline
+}
 $rudraHome = Join-Path $root 'rudra-home'
 New-Item -ItemType Directory -Force -Path $rudraHome | Out-Null
 
@@ -133,22 +149,34 @@ if (Test-Path -Path $targetPath -PathType Leaf) {
   $workDir = $containerTarget
 }
 
-if (Test-Path -Path $targetPath -PathType Leaf) {
-  $runCmd = @(
-    'rudra',
-    '-Zrudra-enable-unsafe-destructor',
-    '--crate-type',
-    'lib',
-    $containerTarget
-  )
-} else {
-  $runCmd = @('cargo', 'rudra')
+# 使用 wrapper 脚本设置 git insteadOf，避免 PowerShell 传参转义问题
+$wrapperPath = Join-Path $root 'run_rudra_wrapper.sh'
+if (-not (Test-Path $wrapperPath)) {
+  Write-Error "Wrapper script not found: $wrapperPath"
+  exit 1
 }
 
+if (Test-Path -Path $targetPath -PathType Leaf) {
+  $runArgs = @('rudra', '-Zrudra-enable-unsafe-destructor', '--crate-type', 'lib', $containerTarget)
+} else {
+  $runArgs = @('cargo', 'rudra')
+}
+
+$workDirLinux = $workDir -replace '\\', '/'
+$wrapperLinux = '/tmp/rudra-repo/run_rudra_wrapper.sh'
+
+# CARGO_HOME 在 workspace 内（与 MirChecker 一致），registry 与 config 共享同一 mount
+$containerRoot = '/tmp/rudra-repo'
 docker run -t --rm `
+  --entrypoint /bin/bash `
   -v "$env:RUDRA_RUNNER_HOME:/tmp/rudra-runner-home" `
-  --env CARGO_HOME=/tmp/rudra-runner-home/cargo_home `
+  --env CARGO_HOME=$containerRoot/.cargo-home `
   --env SCCACHE_DIR=/tmp/rudra-runner-home/sccache_home `
   --env SCCACHE_CACHE_SIZE=10T `
   --env RUSTUP_TOOLCHAIN=nightly-2021-10-21 `
-  -v "${root}:/tmp/rudra-repo" -w $workDir $img @runCmd
+  --env CARGO_REGISTRIES_CRATES_IO_INDEX=https://mirrors.ustc.edu.cn/crates.io-index `
+  --env CARGO_NET_GIT_FETCH_WITH_CLI=true `
+  --env CARGO_HTTP_TIMEOUT=600 `
+  -v "${root}:$containerRoot" `
+  -w $workDirLinux `
+  $img -c "mkdir -p $containerRoot/.cargo-home; git config --global url.`"https://mirrors.ustc.edu.cn/crates.io-index`".insteadOf https://github.com/rust-lang/crates.io-index; sed -i 's/\r$//' $wrapperLinux 2>/dev/null || true; bash $wrapperLinux $($runArgs -join ' ')"

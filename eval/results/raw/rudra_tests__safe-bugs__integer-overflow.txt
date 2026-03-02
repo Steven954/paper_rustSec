@@ -1,0 +1,20 @@
+case_id: tests__safe-bugs__integer-overflow
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 3.052221
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:03:17.790630 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:03:18.192424 |INFO | [rudra-progress] Running rudra for target bin:integer-overflow
+2026-03-01 14:03:19.520400 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:03:19.520524 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:03:19.520605 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:03:19.520619 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:03:19.520631 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:03:19.520643 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:03:19.569175 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

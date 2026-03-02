@@ -1,0 +1,20 @@
+case_id: cases__panic_safe_guard
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.509055
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:19:32.491201 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:19:32.854484 |INFO | [rudra-progress] Running rudra for target bin:panic_safe_guard
+2026-03-01 14:19:33.883157 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:19:33.883265 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:19:33.883295 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:19:33.883306 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:19:33.883637 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:19:33.883663 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:19:33.927394 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

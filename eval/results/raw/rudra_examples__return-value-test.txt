@@ -1,0 +1,21 @@
+case_id: examples__return-value-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 6.330569
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:58:15.004931 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:58:15.448175 |INFO | [rudra-progress] Running rudra for target bin:return-value-test
+2026-03-01 13:58:20.213384 |INFO | [rudra-progress] Rudra started
+2026-03-01 13:58:20.213507 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 13:58:20.213553 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 13:58:20.213557 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 13:58:20.213818 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 13:58:20.213839 |INFO | [rudra-progress] Rudra finished
+2026-03-01 13:58:20.248493 |WARN | [cargo_rudra] Target custom-build:build-script-build is not supported
+2026-03-01 13:58:20.248527 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

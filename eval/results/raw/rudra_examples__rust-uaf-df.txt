@@ -1,0 +1,20 @@
+case_id: examples__rust-uaf-df
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.682887
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:59:53.770045 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:59:54.185468 |INFO | [rudra-progress] Running rudra for target bin:rust-uaf-df
+2026-03-01 13:59:55.190434 |INFO | [rudra-progress] Rudra started
+2026-03-01 13:59:55.190783 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 13:59:55.190926 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 13:59:55.190941 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 13:59:55.192159 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 13:59:55.192188 |INFO | [rudra-progress] Rudra finished
+2026-03-01 13:59:55.226840 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

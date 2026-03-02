@@ -1,0 +1,20 @@
+case_id: trophy-case__r1cs-test2
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 12.550591
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:17:09.100129 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:17:09.917830 |INFO | [rudra-progress] Running rudra for target bin:r1cs-test2
+2026-03-01 14:17:20.338762 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:17:20.338908 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:17:20.338964 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:17:20.338977 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:17:20.338986 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:17:20.338988 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:17:20.384768 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

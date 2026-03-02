@@ -1,0 +1,14 @@
+case_id: examples__c-in-rust-doublefree
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 4.021802
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.54s
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 0.13s
+
+
+===== STDERR =====

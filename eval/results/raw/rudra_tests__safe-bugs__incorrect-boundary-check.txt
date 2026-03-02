@@ -1,0 +1,28 @@
+case_id: tests__safe-bugs__incorrect-boundary-check
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.456377
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:02:54.731946 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:02:55.124025 |INFO | [rudra-progress] Running rudra for target bin:incorrect-boundary-check
+[0m[1m[33mwarning[0m[0m[1m: unused variable: `max_index`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:5:9[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m5[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    let max_index: usize = 5;[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_max_index`[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_variables)]` on by default[0m
+
+2026-03-01 14:02:56.082590 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:02:56.082706 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:02:56.083090 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:02:56.083100 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:02:56.083117 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:02:56.083120 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:02:56.114852 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

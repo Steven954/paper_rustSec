@@ -1,0 +1,21 @@
+case_id: examples__c-in-rust-uaf
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.711166
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:54:02.926995 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:54:03.338395 |INFO | [rudra-progress] Running rudra for target bin:c-in-rust-uaf
+2026-03-01 13:54:04.576026 |INFO | [rudra-progress] Rudra started
+2026-03-01 13:54:04.576143 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 13:54:04.576182 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 13:54:04.576184 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 13:54:04.576381 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 13:54:04.576406 |INFO | [rudra-progress] Rudra finished
+2026-03-01 13:54:04.612430 |WARN | [cargo_rudra] Target custom-build:build-script-build is not supported
+2026-03-01 13:54:04.612467 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

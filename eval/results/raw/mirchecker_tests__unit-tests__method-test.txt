@@ -1,0 +1,31 @@
+case_id: tests__unit-tests__method-test
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 4.112550
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.45s
+[0m[0m[1m[32m    Checking[0m method-test v0.1.0 (/workspace/tests/_eval_runner/tests__unit-tests__method-test)
+[0m[1m[33mwarning[0m[0m[1m: struct is never constructed: `A`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:1:8[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1[0m[0m [0m[0m[1m[38;5;12m| [0m[0mstruct A {[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m       [0m[0m[1m[33m^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: associated function is never used: `func`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:6:12[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m6[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    pub fn func(&mut self) {[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m           [0m[0m[1m[33m^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: 2 warnings emitted[0m
+
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 0.35s
+
+
+===== STDERR =====

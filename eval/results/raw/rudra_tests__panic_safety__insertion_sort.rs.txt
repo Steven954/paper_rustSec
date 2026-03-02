@@ -1,0 +1,53 @@
+case_id: tests__panic_safety__insertion_sort.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.034215
+timeout: False
+
+===== STDOUT =====
+[0m[1m[33mwarning[0m[0m[1m: function is never used: `insertion_sort_unsafe`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__insertion_sort.rs:10:4[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m| [0m[0mfn insertion_sort_unsafe<T: Ord>(arr: &mut [T]) {[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m   [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: comparison is useless due to type limits[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__insertion_sort.rs:15:19[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m15[0m[0m [0m[0m[1m[38;5;12m| [0m[0m            while j >= 0 && arr[j] > item {[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m                  [0m[0m[1m[33m^^^^^^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_comparisons)]` on by default[0m
+
+2026-03-01 14:19:42.647205 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:19:42.647956 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:19:42.647989 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:19:42.647994 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:19:42.648036 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:19:42.648043 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:19:42.650784 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:19:42.650824 |INFO | [rudra-progress] Rudra finished
+[0m[1m[33mwarning[0m[0m[1m: 2 warnings emitted[0m
+
+Warning (UnsafeDataflow:/ReadFlow/CopyFlow/WriteFlow): Potential unsafe dataflow issue in `insertion_sort_unsafe`
+-> /tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__insertion_sort.rs:10:1: 22:2
+fn insertion_sort_unsafe<T: Ord>(arr: &mut [T]) {
+    unsafe {
+        for i in 1..arr.len() {
+            let item = [0m[31mptr::read(&arr[i])[0m;
+            let mut j = i - 1;
+            while j >= 0 && [0m[36marr[j] > item[0m {
+                j = j - 1;
+            }
+            [0m[31mptr::copy(&mut arr[j + 1], &mut arr[j + 2], i - j - 1)[0m;
+            [0m[33mptr::write(&mut arr[j + 1], item)[0m;
+        }
+    }
+}
+[0m
+
+
+===== STDERR =====

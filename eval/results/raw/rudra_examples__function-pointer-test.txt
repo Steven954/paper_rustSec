@@ -1,0 +1,21 @@
+case_id: examples__function-pointer-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 5.809688
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:54:45.432029 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:54:45.858423 |INFO | [rudra-progress] Running rudra for target bin:function-pointer-test
+2026-03-01 13:54:50.165918 |INFO | [rudra-progress] Rudra started
+2026-03-01 13:54:50.166026 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 13:54:50.166069 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 13:54:50.166071 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 13:54:50.166543 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 13:54:50.166563 |INFO | [rudra-progress] Rudra finished
+2026-03-01 13:54:50.205409 |WARN | [cargo_rudra] Target custom-build:build-script-build is not supported
+2026-03-01 13:54:50.205447 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

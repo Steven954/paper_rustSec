@@ -1,0 +1,22 @@
+case_id: tests__send_sync__sync_over_send_fp.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.115284
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:39:21.987156 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:39:21.987322 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:39:21.987328 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:39:21.987330 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:39:21.987393 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:39:21.987409 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:39:21.987413 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:39:21.987415 |INFO | [rudra-progress] Rudra finished
+Info (SendSyncVariance:/NaiveSyncForSync): Suspicious impl of `Sync` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__send_sync__sync_over_send_fp.rs:12:1: 12:56
+unsafe impl<P: Sync, Q: Send> Sync for Channel<P, Q> {}
+
+
+===== STDERR =====

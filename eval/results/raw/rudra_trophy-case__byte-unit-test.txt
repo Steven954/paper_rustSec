@@ -1,0 +1,20 @@
+case_id: trophy-case__byte-unit-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 4.820025
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:11:18.929282 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:11:20.715786 |INFO | [rudra-progress] Running rudra for target bin:byte-unit-test
+2026-03-01 14:11:22.486923 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:11:22.487035 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:11:22.487289 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:11:22.487308 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:11:22.487318 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:11:22.487320 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:11:22.517006 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

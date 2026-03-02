@@ -1,0 +1,36 @@
+case_id: examples__mix-box-free
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 12.358841
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:55:04.533672 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:55:12.259236 |INFO | [rudra-progress] Running rudra for target bin:mix-box-free
+[0m[1m[33mwarning[0m[0m[1m: unused imports: `c_void`, `free`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:1:12[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1[0m[0m [0m[0m[1m[38;5;12m| [0m[0muse libc::{c_void, free, malloc};[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m           [0m[0m[1m[33m^^^^^^[0m[0m  [0m[0m[1m[33m^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: unused variable: `v`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:26:13[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m26[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        let v = Box::from_raw(p as *mut Data);[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m            [0m[0m[1m[33m^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_v`[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_variables)]` on by default[0m
+
+2026-03-01 13:55:15.789752 |INFO | [rudra-progress] Rudra started
+2026-03-01 13:55:15.789863 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 13:55:15.789912 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 13:55:15.789924 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 13:55:15.817745 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 13:55:15.817774 |INFO | [rudra-progress] Rudra finished
+2026-03-01 13:55:15.854834 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

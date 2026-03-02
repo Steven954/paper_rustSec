@@ -1,0 +1,14 @@
+case_id: tests__unit-tests__negation
+tool: ffichecker
+success: True
+exit_code: 0
+duration_sec: 2.795317
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.65s
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.81s
+fatal error: Could not obtain Cargo metadata; likely an ill-formed manifest
+
+
+===== STDERR =====

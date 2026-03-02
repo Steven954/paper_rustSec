@@ -1,0 +1,145 @@
+{
+  "generated_at_utc": "2026-03-02T01:31:59.172312+00:00",
+  "normalized_path": "C:\\Users\\ASUS\\data\\毕业论文\\paper_rustSec\\eval\\results\\normalized.csv",
+  "total_cases": 100,
+  "cases_by_scenario": {
+    "S1": 4,
+    "S2": 66,
+    "S3": 16,
+    "S4": 14
+  },
+  "normalized_rows_total": 300,
+  "normalized_rows_used": 300,
+  "ignored_rows": 0,
+  "duplicate_rows_overwritten": 0,
+  "tools": [
+    "rudra",
+    "mirchecker",
+    "ffichecker"
+  ],
+  "by_tool": {
+    "rudra": {
+      "total_cases": 100,
+      "observed_rows": 100,
+      "success_cases": 100,
+      "detected_cases": 47,
+      "executability_rate": 1.0,
+      "recall": 0.47,
+      "avg_duration_sec": 5.18687
+    },
+    "mirchecker": {
+      "total_cases": 100,
+      "observed_rows": 100,
+      "success_cases": 99,
+      "detected_cases": 14,
+      "executability_rate": 0.99,
+      "recall": 0.14,
+      "avg_duration_sec": 6.07217081
+    },
+    "ffichecker": {
+      "total_cases": 100,
+      "observed_rows": 100,
+      "success_cases": 100,
+      "detected_cases": 11,
+      "executability_rate": 1.0,
+      "recall": 0.11,
+      "avg_duration_sec": 26.709921180000002
+    }
+  },
+  "by_tool_scenario": {
+    "rudra": {
+      "S1": {
+        "total_cases": 4,
+        "success_cases": 4,
+        "detected_cases": 3,
+        "executability_rate": 1.0,
+        "recall": 0.75
+      },
+      "S2": {
+        "total_cases": 66,
+        "success_cases": 66,
+        "detected_cases": 34,
+        "executability_rate": 1.0,
+        "recall": 0.5151515151515151
+      },
+      "S3": {
+        "total_cases": 16,
+        "success_cases": 16,
+        "detected_cases": 2,
+        "executability_rate": 1.0,
+        "recall": 0.125
+      },
+      "S4": {
+        "total_cases": 14,
+        "success_cases": 14,
+        "detected_cases": 8,
+        "executability_rate": 1.0,
+        "recall": 0.5714285714285714
+      }
+    },
+    "mirchecker": {
+      "S1": {
+        "total_cases": 4,
+        "success_cases": 4,
+        "detected_cases": 1,
+        "executability_rate": 1.0,
+        "recall": 0.25
+      },
+      "S2": {
+        "total_cases": 66,
+        "success_cases": 66,
+        "detected_cases": 13,
+        "executability_rate": 1.0,
+        "recall": 0.19696969696969696
+      },
+      "S3": {
+        "total_cases": 16,
+        "success_cases": 15,
+        "detected_cases": 0,
+        "executability_rate": 0.9375,
+        "recall": 0.0
+      },
+      "S4": {
+        "total_cases": 14,
+        "success_cases": 14,
+        "detected_cases": 0,
+        "executability_rate": 1.0,
+        "recall": 0.0
+      }
+    },
+    "ffichecker": {
+      "S1": {
+        "total_cases": 4,
+        "success_cases": 4,
+        "detected_cases": 0,
+        "executability_rate": 1.0,
+        "recall": 0.0
+      },
+      "S2": {
+        "total_cases": 66,
+        "success_cases": 66,
+        "detected_cases": 0,
+        "executability_rate": 1.0,
+        "recall": 0.0
+      },
+      "S3": {
+        "total_cases": 16,
+        "success_cases": 16,
+        "detected_cases": 11,
+        "executability_rate": 1.0,
+        "recall": 0.6875
+      },
+      "S4": {
+        "total_cases": 14,
+        "success_cases": 14,
+        "detected_cases": 0,
+        "executability_rate": 1.0,
+        "recall": 0.0
+      }
+    }
+  },
+  "outputs": {
+    "metrics_summary_json": "C:\\Users\\ASUS\\data\\毕业论文\\paper_rustSec\\eval\\results\\metrics_summary.json",
+    "metrics_by_scenario_csv": "C:\\Users\\ASUS\\data\\毕业论文\\paper_rustSec\\eval\\results\\metrics_by_scenario.csv"
+  }
+}

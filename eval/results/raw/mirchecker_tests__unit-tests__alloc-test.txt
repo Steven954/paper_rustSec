@@ -1,0 +1,16 @@
+case_id: tests__unit-tests__alloc-test
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 4.697510
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.90s
+[0m[0m[1m[32m    Checking[0m macros v0.1.0 (/workspace/macros)
+[0m[0m[1m[32m    Checking[0m alloc-test v0.1.0 (/workspace/tests/_eval_runner/tests__unit-tests__alloc-test)
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 0.50s
+
+
+===== STDERR =====

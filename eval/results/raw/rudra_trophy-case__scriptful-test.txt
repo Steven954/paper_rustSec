@@ -1,0 +1,20 @@
+case_id: trophy-case__scriptful-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 5.103251
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:18:57.190192 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:18:59.033993 |INFO | [rudra-progress] Running rudra for target bin:scriptful-test
+2026-03-01 14:19:01.188683 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:19:01.188799 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:19:01.188915 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:19:01.188929 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:19:01.188940 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:19:01.188941 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:19:01.233686 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

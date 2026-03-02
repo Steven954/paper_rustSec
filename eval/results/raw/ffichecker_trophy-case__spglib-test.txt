@@ -1,0 +1,14 @@
+case_id: trophy-case__spglib-test
+tool: ffichecker
+success: True
+exit_code: 0
+duration_sec: 2.810530
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.69s
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.72s
+fatal error: Could not obtain Cargo metadata; likely an ill-formed manifest
+
+
+===== STDERR =====

@@ -1,0 +1,21 @@
+case_id: examples__c-in-rust-memleak
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.673346
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:53:45.911274 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:53:46.365413 |INFO | [rudra-progress] Running rudra for target bin:c-in-rust-memleak
+2026-03-01 13:53:47.476115 |INFO | [rudra-progress] Rudra started
+2026-03-01 13:53:47.476225 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 13:53:47.476233 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 13:53:47.476234 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 13:53:47.476716 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 13:53:47.476754 |INFO | [rudra-progress] Rudra finished
+2026-03-01 13:53:47.515122 |WARN | [cargo_rudra] Target custom-build:build-script-build is not supported
+2026-03-01 13:53:47.515160 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

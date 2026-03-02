@@ -1,0 +1,19 @@
+case_id: tests__send_sync__okay_negative.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.050696
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:33:21.363232 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:33:21.363360 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:33:21.363369 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:33:21.363371 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:33:21.363425 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:33:21.363440 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:33:21.363443 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:33:21.363446 |INFO | [rudra-progress] Rudra finished
+
+
+===== STDERR =====

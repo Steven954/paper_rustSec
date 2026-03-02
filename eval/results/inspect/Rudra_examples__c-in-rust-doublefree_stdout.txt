@@ -1,0 +1,10 @@
+2026-03-01 09:24:34.310202 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 09:30:19.000818 |INFO | [rudra-progress] Running rudra for target bin:c-in-rust-doublefree
+2026-03-01 09:30:24.236886 |INFO | [rudra-progress] Rudra started
+2026-03-01 09:30:24.237025 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 09:30:24.237087 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 09:30:24.237100 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 09:30:24.237320 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 09:30:24.237345 |INFO | [rudra-progress] Rudra finished
+2026-03-01 09:30:24.273153 |WARN | [cargo_rudra] Target custom-build:build-script-build is not supported
+2026-03-01 09:30:24.273193 |INFO | [rudra-progress] cargo rudra finished

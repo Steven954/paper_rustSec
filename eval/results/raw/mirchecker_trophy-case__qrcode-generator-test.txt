@@ -1,0 +1,65 @@
+case_id: trophy-case__qrcode-generator-test
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 73.992978
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.65s
+[0m[0m[1m[32m   Compiling[0m autocfg v1.0.1
+[0m[0m[1m[32m    Checking[0m cfg-if v1.0.0
+[0m[0m[1m[32m    Checking[0m lazy_static v1.4.0
+[0m[0m[1m[32m   Compiling[0m libc v0.2.89
+[0m[0m[1m[32m   Compiling[0m rayon-core v1.9.0
+[0m[0m[1m[32m    Checking[0m scopeguard v1.1.0
+[0m[0m[1m[32m   Compiling[0m bitflags v1.2.1
+[0m[0m[1m[32m    Checking[0m adler32 v1.2.0
+[0m[0m[1m[32m    Checking[0m either v1.6.1
+[0m[0m[1m[32m   Compiling[0m crc32fast v1.2.1
+[0m[0m[1m[32m    Checking[0m adler v1.0.2
+[0m[0m[1m[32m    Checking[0m weezl v0.1.4
+[0m[0m[1m[32m    Checking[0m byteorder v1.4.3
+[0m[0m[1m[32m    Checking[0m color_quant v1.1.0
+[0m[0m[1m[32m    Checking[0m utf8-width v0.1.4
+[0m[0m[1m[32m    Checking[0m bytemuck v1.5.1
+[0m[0m[1m[32m    Checking[0m scoped_threadpool v0.1.9
+[0m[0m[1m[32m    Checking[0m qrcodegen v1.6.0
+[0m[0m[1m[32m    Checking[0m html-escape v0.2.7
+[0m[0m[1m[32m    Checking[0m miniz_oxide v0.3.7
+[0m[0m[1m[32m    Checking[0m deflate v0.8.6
+[0m[0m[1m[32m    Checking[0m gif v0.11.1
+[0m[0m[1m[32m   Compiling[0m crossbeam-utils v0.8.3
+[0m[0m[1m[32m   Compiling[0m memoffset v0.6.1
+[0m[0m[1m[32m   Compiling[0m num-traits v0.2.14
+[0m[0m[1m[32m   Compiling[0m rayon v1.5.0
+[0m[0m[1m[32m   Compiling[0m num-integer v0.1.44
+[0m[0m[1m[32m   Compiling[0m miniz_oxide v0.4.4
+[0m[0m[1m[32m   Compiling[0m num-rational v0.3.2
+[0m[0m[1m[32m   Compiling[0m num-iter v0.1.42
+[0m[0m[1m[32m    Checking[0m png v0.16.8
+[0m[0m[1m[32m    Checking[0m num_cpus v1.13.0
+[0m[0m[1m[32m    Checking[0m crossbeam-epoch v0.9.3
+[0m[0m[1m[32m    Checking[0m crossbeam-channel v0.5.0
+[0m[0m[1m[32m    Checking[0m crossbeam-deque v0.8.0
+[0m[0m[1m[32m    Checking[0m jpeg-decoder v0.1.22
+[0m[0m[1m[32m    Checking[0m tiff v0.6.1
+[0m[0m[1m[32m    Checking[0m image v0.23.14
+[0m[0m[1m[32m    Checking[0m qrcode-generator v4.0.4
+[0m[0m[1m[32m    Checking[0m qrcode-generator-test v0.1.0 (/workspace/tests/_eval_runner/trophy-case__qrcode-generator-test)
+[0m[1m[33mwarning[0m[0m[1m: unused `std::result::Result` that must be used[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:8:5[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m8[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    to_image_from_str("hello", QrCodeEcc::Low, std::usize::MAX);[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m    [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_must_use)]` on by default[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this `Result` may be an `Err` variant, which should be handled[0m
+
+[0m[1m[33mwarning[0m[0m[1m: 1 warning emitted[0m
+
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 13.90s
+
+
+===== STDERR =====

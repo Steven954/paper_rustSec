@@ -1,0 +1,20 @@
+case_id: trophy-case__brotli-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 12.608034
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:09:06.736421 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:09:11.099872 |INFO | [rudra-progress] Running rudra for target bin:brotli-test
+2026-03-01 14:09:18.186116 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:09:18.186267 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:09:18.186336 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:09:18.186352 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:09:18.186371 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:09:18.186382 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:09:18.236465 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

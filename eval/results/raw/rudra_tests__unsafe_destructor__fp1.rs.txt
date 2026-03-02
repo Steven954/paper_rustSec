@@ -1,0 +1,28 @@
+case_id: tests__unsafe_destructor__fp1.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.054926
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:47:57.641210 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:47:57.641371 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:47:57.641405 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:47:57.641416 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:47:57.641424 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:47:57.641426 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:47:57.645282 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:47:57.645335 |INFO | [rudra-progress] Rudra finished
+Warning (UnsafeDestructor): unsafe block detected in drop
+-> /tmp/rudra-repo/tests/_eval_runner/tests__unsafe_destructor__fp1.rs:14:1: 20:2
+impl Drop for Leak<'_> {
+    fn drop(&mut self) {
+        unsafe {
+            self.vec.set_len(0);
+        }
+    }
+}
+
+
+===== STDERR =====

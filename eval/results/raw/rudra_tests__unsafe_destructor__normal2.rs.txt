@@ -1,0 +1,28 @@
+case_id: tests__unsafe_destructor__normal2.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.067310
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:50:32.676804 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:50:32.676982 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:50:32.677016 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:50:32.677027 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:50:32.677033 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:50:32.677042 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:50:32.680520 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:50:32.680554 |INFO | [rudra-progress] Rudra finished
+Warning (UnsafeDestructor): unsafe block detected in drop
+-> /tmp/rudra-repo/tests/_eval_runner/tests__unsafe_destructor__normal2.rs:15:1: 21:2
+impl Drop for StrcCtx {
+    fn drop(&mut self) {
+        unsafe {
+            let _ = std::ffi::CString::from_raw(self.ptr as *mut std::os::raw::c_char);
+        }
+    }
+}
+
+
+===== STDERR =====

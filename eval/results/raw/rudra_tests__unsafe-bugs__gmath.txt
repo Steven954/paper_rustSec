@@ -1,0 +1,20 @@
+case_id: tests__unsafe-bugs__gmath
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 3.010634
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:07:44.846821 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:07:45.761094 |INFO | [rudra-progress] Running rudra for target lib:gmath
+2026-03-01 14:07:46.646546 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:07:46.646660 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:07:46.646702 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:07:46.646704 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:07:46.646713 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:07:46.646715 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:07:46.819091 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

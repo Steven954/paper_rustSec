@@ -1,0 +1,13 @@
+tool,scenario,total_cases,success_cases,detected_cases,executability_rate,recall
+rudra,S1,4,4,3,1.0,0.75
+rudra,S2,66,66,34,1.0,0.5151515151515151
+rudra,S3,16,16,2,1.0,0.125
+rudra,S4,14,14,8,1.0,0.5714285714285714
+mirchecker,S1,4,4,1,1.0,0.25
+mirchecker,S2,66,66,13,1.0,0.19696969696969696
+mirchecker,S3,16,15,0,0.9375,0.0
+mirchecker,S4,14,14,0,1.0,0.0
+ffichecker,S1,4,4,0,1.0,0.0
+ffichecker,S2,66,66,0,1.0,0.0
+ffichecker,S3,16,16,11,1.0,0.6875
+ffichecker,S4,14,14,0,1.0,0.0

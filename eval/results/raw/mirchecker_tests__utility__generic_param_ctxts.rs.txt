@@ -1,0 +1,28 @@
+case_id: tests__utility__generic_param_ctxts.rs
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 3.735128
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.50s
+[0m[1m[38;5;9merror[E0601][0m[0m[1m: `main` function not found in crate `tests__utility__generic_param_ctxts`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/workspace/tests/_eval_runner/tests__utility__generic_param_ctxts.rs:1:1[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1[0m[0m  [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m/[0m[0m [0m[0m#![allow(dead_code)][0m
+[0m[1m[38;5;12m2[0m[0m  [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m
+[0m[1m[38;5;12m3[0m[0m  [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m[0m [0m[0m// B.index = 1[0m
+[0m[1m[38;5;12m4[0m[0m  [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m[0m [0m[0mstruct My<A, B> {[0m
+[0m[1m[38;5;12m...[0m[0m  [0m[0m[1m[38;5;9m|[0m
+[0m[1m[38;5;12m19[0m[0m [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m[0m [0m[0m    pub fn hello<'b, C>(&self, x: C, y: &'b B) {}[0m
+[0m[1m[38;5;12m20[0m[0m [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m[0m [0m[0m}[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|_^[0m[0m [0m[0m[1m[38;5;9mconsider adding a `main` function to `/workspace/tests/_eval_runner/tests__utility__generic_param_ctxts.rs`[0m
+
+[0m[1m[38;5;9merror[0m[0m[1m: aborting due to previous error[0m
+
+[0m[1mFor more information about this error, try `rustc --explain E0601`.[0m
+
+
+===== STDERR =====

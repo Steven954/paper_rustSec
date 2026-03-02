@@ -1,0 +1,44 @@
+case_id: tests__panic_safety__vec_push_all.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.058333
+timeout: False
+
+===== STDOUT =====
+[0m[1m[33mwarning[0m[0m[1m: associated function is never used: `push_all`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__vec_push_all.rs:12:8[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m12[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    fn push_all(&mut self, to_push: &[T]) {[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m       [0m[0m[1m[33m^^^^^^^^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
+
+2026-03-01 14:28:33.445803 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:28:33.445988 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:28:33.446001 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:28:33.446004 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:28:33.446023 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:28:33.446093 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:28:33.447351 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:28:33.447375 |INFO | [rudra-progress] Rudra finished
+[0m[1m[33mwarning[0m[0m[1m: 1 warning emitted[0m
+
+Error (UnsafeDataflow:/WriteFlow/VecSetLen): Potential unsafe dataflow issue in `MyVec::<T>::push_all`
+-> /tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__vec_push_all.rs:12:5: 23:6
+fn push_all(&mut self, to_push: &[T]) {
+        self.0.reserve(to_push.len());
+        unsafe {
+            // can't overflow because we just reserved this
+            [0m[31mself.0.set_len(self.0.len() + to_push.len())[0m;
+
+            for (i, x) in to_push.iter().enumerate() {
+                // Clone might panic
+                [0m[33mself.0.as_mut_ptr().offset(i as isize).write([0m[36mx.clone()[0m[33m)[0m;
+            }
+        }
+    }
+[0m
+
+
+===== STDERR =====

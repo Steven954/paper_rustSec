@@ -1,0 +1,26 @@
+case_id: trophy-case__executable-memory-test2
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 12.167461
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 3.03s
+[0m[0m[1m[32m   Compiling[0m libc v0.2.93
+[0m[0m[1m[32m   Compiling[0m winapi v0.3.9
+[0m[0m[1m[32m    Checking[0m executable_memory v0.1.2
+[0m[0m[1m[32m    Checking[0m executable-memory-test2 v0.1.0 (/workspace/tests/_eval_runner/trophy-case__executable-memory-test2)
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "index out of bounds: the length is \"move _33\" but the index is \"_32\""[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:9:26[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m9[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    println!("read: {}", memory.as_slice()[5000]);[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m                         [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: 1 warning emitted[0m
+
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.39s
+
+
+===== STDERR =====

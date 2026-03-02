@@ -1,0 +1,19 @@
+case_id: examples__cstring-test
+tool: ffichecker
+success: True
+exit_code: 0
+duration_sec: 9.452069
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.65s
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.76s
+[0m[0m[1m[32m   Compiling[0m cc v1.0.73
+[0m[0m[1m[32m   Compiling[0m cstring-test v0.1.0 (/workspace/examples/_eval_runner/examples__cstring-test)
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 4.89s
++ "/workspace/target/release/analyzer" "--precision_filter" "low"
+("cstring_test::main", Bug info: LLVM IR of C code is known. Possible bugs: Memory Leakage, After FFI c_func finishes, argument %p is still in state `Forgotten`, seriousness: Medium, function: cstring_test::main)
+("c_func", Bug info: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func)
+
+
+===== STDERR =====

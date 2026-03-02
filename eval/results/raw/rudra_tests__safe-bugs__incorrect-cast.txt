@@ -1,0 +1,20 @@
+case_id: tests__safe-bugs__incorrect-cast
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.365116
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:03:05.974028 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:03:06.324874 |INFO | [rudra-progress] Running rudra for target bin:incorrect-cast
+2026-03-01 14:03:07.259657 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:03:07.259763 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:03:07.259830 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:03:07.259846 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:03:07.259855 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:03:07.259864 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:03:07.291222 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

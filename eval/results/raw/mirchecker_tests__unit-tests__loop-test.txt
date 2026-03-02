@@ -1,0 +1,32 @@
+case_id: tests__unit-tests__loop-test
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 4.374835
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.49s
+[0m[0m[1m[32m    Checking[0m macros v0.1.0 (/workspace/macros)
+[0m[0m[1m[32m    Checking[0m loop-test v0.1.0 (/workspace/tests/_eval_runner/tests__unit-tests__loop-test)
+[0m[1m[33mwarning[0m[0m[1m: unused `#[macro_use]` import[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:1:1[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1[0m[0m [0m[0m[1m[38;5;12m| [0m[0m#[macro_use][0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m[1m[33m^^^^^^^^^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "attempt to compute `\"(*_2)\" + \"const 1_i32\"`, which would overflow"[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:24:9[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m24[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        *r += 1;[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: 2 warnings emitted[0m
+
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 0.52s
+
+
+===== STDERR =====

@@ -1,0 +1,27 @@
+case_id: tests__send_sync__wild_sync.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.299305
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:44:18.241433 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:44:18.241593 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:44:18.241609 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:44:18.241622 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:44:18.241716 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:44:18.241728 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:44:18.241732 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:44:18.241747 |INFO | [rudra-progress] Rudra finished
+Info (SendSyncVariance:/NaiveSyncForSync): Suspicious impl of `Sync` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__send_sync__wild_sync.rs:9:1: 14:2
+unsafe impl<P: Send, Q> Sync for Atom<P, Q>
+where
+    Q: Copy,
+    P: Sync,
+{
+}
+
+
+===== STDERR =====

@@ -1,0 +1,43 @@
+case_id: tests__safe-bugs__out-of-bound-index
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 4.550669
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.84s
+[0m[0m[1m[32m    Checking[0m out-of-bound-index v0.1.0 (/workspace/tests/_eval_runner/tests__safe-bugs__out-of-bound-index)
+[0m[1m[33mwarning[0m[0m[1m: unused variable: `result`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:8:9[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m8[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    let result = a[i];[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_result`[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_variables)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: index out of bound[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:5:11[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m5[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        a[i] = i;[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m          [0m[0m[1m[33m^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "attempt to compute `\"move _12\" + \"const 1_usize\"`, which would overflow"[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:6:13[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m6[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        i = i + 1;[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m            [0m[0m[1m[33m^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: index out of bound[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:8:20[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m8[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    let result = a[i];[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m                   [0m[0m[1m[33m^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: 4 warnings emitted[0m
+
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 0.40s
+
+
+===== STDERR =====

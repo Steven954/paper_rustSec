@@ -1,0 +1,35 @@
+case_id: tests__send_sync__wild_phantom.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.063536
+timeout: False
+
+===== STDOUT =====
+[0m[1m[33mwarning[0m[0m[1m: field is never read: `ptr`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__send_sync__wild_phantom.rs:12:5[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m12[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    ptr: NonNull<T>,[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m    [0m[0m[1m[33m^^^^^^^^^^^^^^^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
+
+2026-03-01 14:41:48.142175 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:41:48.142287 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:41:48.142291 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:41:48.142293 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:41:48.142359 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:41:48.142373 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:41:48.142377 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:41:48.142392 |INFO | [rudra-progress] Rudra finished
+[0m[1m[33mwarning[0m[0m[1m: 1 warning emitted[0m
+
+Error (SendSyncVariance:/PhantomSendForSend/NaiveSendForSend/RelaxSend): Suspicious impl of `Send` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__send_sync__wild_phantom.rs:15:1: 15:44
+unsafe impl<'a, A> Send for Atom1<'a, A> {}
+Warning (SendSyncVariance:/NaiveSyncForSync/RelaxSync): Suspicious impl of `Sync` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__send_sync__wild_phantom.rs:16:1: 16:44
+unsafe impl<'a, A> Sync for Atom1<'a, A> {}
+
+
+===== STDERR =====

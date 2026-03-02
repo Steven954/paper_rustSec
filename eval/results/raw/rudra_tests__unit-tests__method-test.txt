@@ -1,0 +1,34 @@
+case_id: tests__unit-tests__method-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.258885
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:06:25.704043 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:06:26.049136 |INFO | [rudra-progress] Running rudra for target bin:method-test
+[0m[1m[33mwarning[0m[0m[1m: struct is never constructed: `A`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:1:8[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1[0m[0m [0m[0m[1m[38;5;12m| [0m[0mstruct A {[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m       [0m[0m[1m[33m^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: associated function is never used: `func`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:6:12[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m6[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    pub fn func(&mut self) {[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m           [0m[0m[1m[33m^^^^[0m
+
+2026-03-01 14:06:26.934316 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:06:26.934433 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:06:26.934532 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:06:26.934534 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:06:26.934543 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:06:26.934544 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:06:26.968593 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

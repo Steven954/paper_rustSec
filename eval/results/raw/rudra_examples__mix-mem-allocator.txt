@@ -1,0 +1,30 @@
+case_id: examples__mix-mem-allocator
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 80.682478
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:55:27.242431 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:55:47.209820 |INFO | [rudra-progress] Running rudra for target bin:mix-mem-allocator
+[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:23:9[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m23[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    let mut n = Box::new(Data::default());[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_mut)]` on by default[0m
+
+2026-03-01 13:56:46.727658 |INFO | [rudra-progress] Rudra started
+2026-03-01 13:56:46.728095 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 13:56:46.728150 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 13:56:46.728153 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 13:56:46.763734 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 13:56:46.763774 |INFO | [rudra-progress] Rudra finished
+2026-03-01 13:56:46.805726 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

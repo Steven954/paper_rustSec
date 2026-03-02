@@ -6,6 +6,9 @@ param(
   [string]$Precision = 'low'
 )
 
+# NOTE: Keep `cargo clean` before running FFIChecker.
+# The official FFIChecker README usage examples run `cargo clean` first,
+# which helps avoid stale build artifacts affecting analysis results.
 $root = Split-Path -Parent $PSCommandPath
 
 function Resolve-TargetPath {

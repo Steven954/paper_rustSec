@@ -1,0 +1,5 @@
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.92s
+[0m[0m[1m[32m   Compiling[0m cc v1.0.69
+[0m[0m[1m[32m   Compiling[0m c-in-rust-doublefree v0.1.0 (/workspace/tests/_eval_runner/examples__c-in-rust-doublefree)
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.60s

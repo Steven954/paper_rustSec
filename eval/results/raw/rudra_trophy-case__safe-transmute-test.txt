@@ -1,0 +1,20 @@
+case_id: trophy-case__safe-transmute-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 4.587645
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:18:41.726007 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:18:43.691685 |INFO | [rudra-progress] Running rudra for target bin:safe-transmute-test
+2026-03-01 14:18:45.079216 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:18:45.079333 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:18:45.079381 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:18:45.079395 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:18:45.079403 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:18:45.079412 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:18:45.116035 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

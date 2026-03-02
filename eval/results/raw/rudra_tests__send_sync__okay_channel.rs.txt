@@ -1,0 +1,22 @@
+case_id: tests__send_sync__okay_channel.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.034757
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:30:59.100964 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:30:59.101080 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:30:59.101086 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:30:59.101087 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:30:59.104904 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:30:59.104938 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:30:59.104947 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:30:59.104960 |INFO | [rudra-progress] Rudra finished
+Warning (SendSyncVariance:/NaiveSyncForSync/RelaxSync): Suspicious impl of `Sync` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__send_sync__okay_channel.rs:13:1: 13:56
+unsafe impl<P: Send, Q: Send> Sync for Channel<P, Q> {}
+
+
+===== STDERR =====

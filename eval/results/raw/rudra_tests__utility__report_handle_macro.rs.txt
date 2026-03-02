@@ -1,0 +1,41 @@
+case_id: tests__utility__report_handle_macro.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.091382
+timeout: False
+
+===== STDOUT =====
+[0m[1m[33mwarning[0m[0m[1m: type `X509_LOOKUP_METHOD` should have an upper camel case name[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__utility__report_handle_macro.rs:31:10[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m31[0m[0m [0m[0m[1m[38;5;12m| [0m[0mpub enum X509_LOOKUP_METHOD {}[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m         [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[33mhelp: convert the identifier to upper camel case: `X509LookupMethod`[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(non_camel_case_types)]` on by default[0m
+
+2026-03-01 14:54:29.527730 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:54:29.527887 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:54:29.527902 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:54:29.527919 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:54:29.527996 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:54:29.528009 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:54:29.528013 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:54:29.528014 |INFO | [rudra-progress] Rudra finished
+[0m[1m[33mwarning[0m[0m[1m: 1 warning emitted[0m
+
+Error (SendSyncVariance:/PhantomSendForSend/NaiveSendForSend/RelaxSend): Suspicious impl of `Send` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__utility__report_handle_macro.rs:24:9: 24:44
+unsafe impl <T> Send for X509LookupMethod<T> { }
+Warning (SendSyncVariance:/NaiveSyncForSync/RelaxSync): Suspicious impl of `Sync` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__utility__report_handle_macro.rs:26:9: 26:44
+unsafe impl <T> Sync for X509LookupMethod<T> { }
+Error (SendSyncVariance:/PhantomSendForSend/NaiveSendForSend/RelaxSend): Suspicious impl of `Send` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__utility__report_handle_macro.rs:25:9: 25:47
+unsafe impl <T> Send for X509LookupMethodRef<T> { }
+Warning (SendSyncVariance:/NaiveSyncForSync/RelaxSync): Suspicious impl of `Sync` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__utility__report_handle_macro.rs:27:9: 27:47
+unsafe impl <T> Sync for X509LookupMethodRef<T> { }
+
+
+===== STDERR =====

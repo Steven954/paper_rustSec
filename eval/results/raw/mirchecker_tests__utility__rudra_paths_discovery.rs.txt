@@ -1,0 +1,28 @@
+case_id: tests__utility__rudra_paths_discovery.rs
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 3.760781
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.49s
+[0m[1m[38;5;9merror[E0601][0m[0m[1m: `main` function not found in crate `tests__utility__rudra_paths_discovery`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/workspace/tests/_eval_runner/tests__utility__rudra_paths_discovery.rs:2:1[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m2[0m[0m  [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m/[0m[0m [0m[0muse std::ptr::NonNull;[0m
+[0m[1m[38;5;12m3[0m[0m  [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m
+[0m[1m[38;5;12m4[0m[0m  [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m[0m [0m[0mstruct PathsDiscovery;[0m
+[0m[1m[38;5;12m5[0m[0m  [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m
+[0m[1m[38;5;12m...[0m[0m  [0m[0m[1m[38;5;9m|[0m
+[0m[1m[38;5;12m47[0m[0m [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m[0m [0m[0m    }[0m
+[0m[1m[38;5;12m48[0m[0m [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|[0m[0m [0m[0m}[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m[1m[38;5;9m|_^[0m[0m [0m[0m[1m[38;5;9mconsider adding a `main` function to `/workspace/tests/_eval_runner/tests__utility__rudra_paths_discovery.rs`[0m
+
+[0m[1m[38;5;9merror[0m[0m[1m: aborting due to previous error[0m
+
+[0m[1mFor more information about this error, try `rustc --explain E0601`.[0m
+
+
+===== STDERR =====

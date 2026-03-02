@@ -1,0 +1,28 @@
+case_id: tests__safe-bugs__out-of-bound-index
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.775841
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:03:29.682406 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:03:30.084345 |INFO | [rudra-progress] Running rudra for target bin:out-of-bound-index
+[0m[1m[33mwarning[0m[0m[1m: unused variable: `result`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:8:9[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m8[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    let result = a[i];[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_result`[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_variables)]` on by default[0m
+
+2026-03-01 14:03:31.065135 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:03:31.065230 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:03:31.065270 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:03:31.065272 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:03:31.065280 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:03:31.065281 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:03:31.106532 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

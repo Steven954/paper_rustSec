@@ -1,0 +1,41 @@
+case_id: tests__safe-bugs__integer-overflow
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 4.709343
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.66s
+[0m[0m[1m[32m    Checking[0m integer-overflow v0.1.0 (/workspace/tests/_eval_runner/tests__safe-bugs__integer-overflow)
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "attempt to compute `\"t\" + \"const 1_i32\"`, which would overflow"[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:8:9[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m8[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        t += 1;[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "attempt to compute `\"move _6\" - \"move _7\"`, which would overflow"[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:14:9[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m14[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    a = a - t as u32; // Error: u32 cannot be negative[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^^^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "attempt to compute `\"move _11\" + \"move _12\"`, which would overflow"[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:18:9[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m18[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    b = b + t; // Error: integer overflow[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "attempt to compute `\"move _15\" - \"move _16\"`, which would overflow"[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:21:9[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m21[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    c = c - t; // OK[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: 4 warnings emitted[0m
+
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 0.52s
+
+
+===== STDERR =====

@@ -1,0 +1,40 @@
+case_id: trophy-case__bitvec-test
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 10.536759
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.79s
+[0m[0m[1m[32m   Compiling[0m radium v0.6.2
+[0m[0m[1m[32m    Checking[0m funty v1.1.0
+[0m[0m[1m[32m    Checking[0m wyz v0.2.0
+[0m[0m[1m[32m    Checking[0m tap v1.0.0
+[0m[0m[1m[32m    Checking[0m bitvec v0.20.1
+[0m[0m[1m[32m    Checking[0m bitvec-test v0.1.0 (/workspace/tests/_eval_runner/trophy-case__bitvec-test)
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Provably error: "attempt to divide `\"_6\"` by zero"[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0m/workspace/.cargo-home/registry/src/mirrors.ustc.edu.cn-12df342d903acd47/bitvec-0.20.1/src/mem.rs:117:2[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m117[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    bits / width + (bits % width != 0) as usize[0m
+[0m    [0m[0m[1m[38;5;12m| [0m[0m    [0m[0m[1m[33m^^^^^^^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "attempt to compute `\"move _5\" + \"move _9\"`, which would overflow"[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0m/workspace/.cargo-home/registry/src/mirrors.ustc.edu.cn-12df342d903acd47/bitvec-0.20.1/src/mem.rs:117:2[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m117[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    bits / width + (bits % width != 0) as usize[0m
+[0m    [0m[0m[1m[38;5;12m| [0m[0m    [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Provably error: "attempt to calculate the remainder of `\"_12\"` with a divisor of zero"[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0m/workspace/.cargo-home/registry/src/mirrors.ustc.edu.cn-12df342d903acd47/bitvec-0.20.1/src/mem.rs:117:18[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m117[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    bits / width + (bits % width != 0) as usize[0m
+[0m    [0m[0m[1m[38;5;12m| [0m[0m                    [0m[0m[1m[33m^^^^^^^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: 3 warnings emitted[0m
+
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 4.04s
+
+
+===== STDERR =====

@@ -1,0 +1,54 @@
+case_id: tests__unit-tests__big-loop
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 4.814899
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.95s
+[0m[0m[1m[32m    Checking[0m macros v0.1.0 (/workspace/macros)
+[0m[0m[1m[32m    Checking[0m big-loop v0.1.0 (/workspace/tests/_eval_runner/tests__unit-tests__big-loop)
+[0m[1m[33mwarning[0m[0m[1m: possible dummy message[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:7:17[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m7[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        verify!(i < 1000000);[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m                [0m[0m[1m[33m^^^^^^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "attempt to compute `\"i\" + \"const 1_i32\"`, which would overflow"[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:8:9[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m8[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        i += 1;[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: possible dummy message[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:10:13[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    verify!(i >= 1000000);[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m            [0m[0m[1m[33m^^^^^^^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: possible dummy message[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:14:17[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m14[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        verify!(j > 0);[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m                [0m[0m[1m[33m^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: [MirChecker] Possible error: "attempt to compute `\"_11\" - \"const 1_i32\"`, which would overflow"[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:15:9[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m15[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        j -= 1;[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: possible dummy message[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:17:13[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m17[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    verify!(j <= 0);[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m            [0m[0m[1m[33m^^^^^^[0m
+
+[0m[1m[33mwarning[0m[0m[1m: 6 warnings emitted[0m
+
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 0.56s
+
+
+===== STDERR =====

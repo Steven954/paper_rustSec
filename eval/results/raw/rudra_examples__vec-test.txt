@@ -1,0 +1,21 @@
+case_id: examples__vec-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 6.374589
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:02:23.680088 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:02:24.147871 |INFO | [rudra-progress] Running rudra for target bin:vec-test
+2026-03-01 14:02:28.952499 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:02:28.952838 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:02:28.952915 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:02:28.952928 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:02:28.953353 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:02:28.953375 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:02:28.994655 |WARN | [cargo_rudra] Target custom-build:build-script-build is not supported
+2026-03-01 14:02:28.994692 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

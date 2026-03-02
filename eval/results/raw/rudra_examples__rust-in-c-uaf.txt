@@ -1,0 +1,13 @@
+case_id: examples__rust-in-c-uaf
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 71.444210
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:58:35.326403 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:59:45.610426 |ERROR| [rudra-progress] This seems to be a workspace, which is not supported by cargo-rudra
+
+
+===== STDERR =====

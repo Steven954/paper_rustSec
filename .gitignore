@@ -1,3 +1,7 @@
 **/target/
 **/*.log
 .DS_Store
+tools/Rudra/.cargo-home/
+tools/Rudra/rudra-home/
+**/__pycache__/
+**/*.pyc

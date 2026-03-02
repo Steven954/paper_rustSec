@@ -1,0 +1,18 @@
+case_id: examples__string-test
+tool: ffichecker
+success: True
+exit_code: 0
+duration_sec: 10.268417
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.88s
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.89s
+[0m[0m[1m[32m   Compiling[0m cc v1.0.73
+[0m[0m[1m[32m   Compiling[0m string-test v0.1.0 (/workspace/examples/_eval_runner/examples__string-test)
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 5.03s
++ "/workspace/target/release/analyzer" "--precision_filter" "low"
+("c_func", Bug info: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func)
+
+
+===== STDERR =====

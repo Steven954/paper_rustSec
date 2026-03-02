@@ -1,0 +1,19 @@
+case_id: tests__unsafe_destructor__ffi.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.079577
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:46:44.623131 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:46:44.623377 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:46:44.623481 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:46:44.623509 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:46:44.623520 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:46:44.623546 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:46:44.629750 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:46:44.629819 |INFO | [rudra-progress] Rudra finished
+
+
+===== STDERR =====

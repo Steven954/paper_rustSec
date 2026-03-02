@@ -1,0 +1,20 @@
+case_id: trophy-case__runes-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 29.635979
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:17:47.329839 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:18:14.426701 |INFO | [rudra-progress] Running rudra for target bin:runes-test
+2026-03-01 14:18:15.814155 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:18:15.814288 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:18:15.814503 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:18:15.814522 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:18:15.826020 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:18:15.826053 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:18:15.863336 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

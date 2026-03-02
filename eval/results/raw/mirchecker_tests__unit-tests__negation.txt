@@ -1,0 +1,16 @@
+case_id: tests__unit-tests__negation
+tool: mirchecker
+success: True
+exit_code: 0
+duration_sec: 4.562884
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.84s
+[0m[0m[1m[32m    Checking[0m macros v0.1.0 (/workspace/macros)
+[0m[0m[1m[32m    Checking[0m negation v0.1.0 (/workspace/tests/_eval_runner/tests__unit-tests__negation)
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 0.45s
+
+
+===== STDERR =====

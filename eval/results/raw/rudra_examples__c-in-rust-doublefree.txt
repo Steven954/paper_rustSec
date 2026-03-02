@@ -1,0 +1,21 @@
+case_id: examples__c-in-rust-doublefree
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 3.069914
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:53:27.442127 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:53:27.861508 |INFO | [rudra-progress] Running rudra for target bin:c-in-rust-doublefree
+2026-03-01 13:53:29.308899 |INFO | [rudra-progress] Rudra started
+2026-03-01 13:53:29.309021 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 13:53:29.309069 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 13:53:29.309082 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 13:53:29.309325 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 13:53:29.309347 |INFO | [rudra-progress] Rudra finished
+2026-03-01 13:53:29.356087 |WARN | [cargo_rudra] Target custom-build:build-script-build is not supported
+2026-03-01 13:53:29.356130 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

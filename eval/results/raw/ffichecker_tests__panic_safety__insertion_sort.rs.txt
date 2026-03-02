@@ -1,0 +1,14 @@
+case_id: tests__panic_safety__insertion_sort.rs
+tool: ffichecker
+success: True
+exit_code: 0
+duration_sec: 6.418325
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.79s
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.95s
+fatal error: This seems to be a workspace, which is not supported by cargo-miri
+
+
+===== STDERR =====

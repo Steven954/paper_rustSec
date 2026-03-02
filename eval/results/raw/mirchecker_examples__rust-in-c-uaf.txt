@@ -1,0 +1,17 @@
+case_id: examples__rust-in-c-uaf
+tool: mirchecker
+success: False
+exit_code: 1
+duration_sec: 0.628169
+timeout: False
+
+===== STDOUT =====
+
+
+===== STDERR =====
+C:\Users\ASUS\data\��ҵ����\paper_rustSec\tools\mirchecker\run_mir_checker.ps1 : Target directory doe
+s not contain Cargo.toml: C:\Users\ASUS\data\��ҵ����\paper_rustSec\tools\mirchecker\tests\_eval_runn
+er\examples__rust-in-c-uaf
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,run_mir_checker.ps1
+ 

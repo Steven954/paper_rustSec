@@ -1,0 +1,26 @@
+case_id: trophy-case__gmath-test
+tool: ffichecker
+success: True
+exit_code: 0
+duration_sec: 4.109314
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.66s
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.75s
+[0m[0m[1m[32m   Compiling[0m gmath v0.1.0 (/workspace/examples/_eval_runner/trophy-case__gmath-test/gmath)
+[0m[0m[1m[32m   Compiling[0m gmath-test v0.1.0 (/workspace/examples/_eval_runner/trophy-case__gmath-test)
+[0m[1m[33mwarning[0m[0m[1m: unused import: `gmath::dealloc`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:1:5[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1[0m[0m [0m[0m[1m[38;5;12m| [0m[0muse gmath::dealloc;[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m    [0m[0m[1m[33m^^^^^^^^^^^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
+
+[0m[0m[1m[33mwarning[0m[1m:[0m `gmath-test` (bin "gmath-test") generated 1 warning
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 1.02s
++ "/workspace/target/release/analyzer" "--precision_filter" "low"
+
+
+===== STDERR =====

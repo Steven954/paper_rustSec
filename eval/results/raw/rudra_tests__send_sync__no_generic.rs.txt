@@ -1,0 +1,19 @@
+case_id: tests__send_sync__no_generic.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 0.994324
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:29:46.510206 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:29:46.510568 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:29:46.510587 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:29:46.510590 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:29:46.510734 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:29:46.510749 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:29:46.510754 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:29:46.510771 |INFO | [rudra-progress] Rudra finished
+
+
+===== STDERR =====

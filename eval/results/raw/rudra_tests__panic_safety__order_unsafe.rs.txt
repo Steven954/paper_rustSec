@@ -1,0 +1,38 @@
+case_id: tests__panic_safety__order_unsafe.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.089516
+timeout: False
+
+===== STDOUT =====
+[0m[1m[33mwarning[0m[0m[1m: function is never used: `test_order_unsafe`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__order_unsafe.rs:10:4[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m| [0m[0mfn test_order_unsafe<I: Iterator<Item = impl Debug>>(mut iter: I) {[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m   [0m[0m[1m[33m^^^^^^^^^^^^^^^^^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
+
+2026-03-01 14:23:39.816841 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:23:39.817013 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:23:39.817027 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:23:39.817030 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:23:39.817063 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:23:39.817075 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:23:39.817467 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:23:39.817492 |INFO | [rudra-progress] Rudra finished
+[0m[1m[33mwarning[0m[0m[1m: 1 warning emitted[0m
+
+Warning (UnsafeDataflow:/ReadFlow): Potential unsafe dataflow issue in `test_order_unsafe`
+-> /tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__order_unsafe.rs:10:1: 15:2
+fn test_order_unsafe<I: Iterator<Item = impl Debug>>(mut iter: I) {
+    unsafe {
+        [0m[31mstd::ptr::read(&Box::new(1234) as *const _)[0m;
+    }
+    println!("{:?}", [0m[36miter.next()[0m);
+}
+[0m
+
+
+===== STDERR =====

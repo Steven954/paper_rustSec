@@ -1,0 +1,29 @@
+case_id: tests__unsafe_destructor__normal1.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.050452
+timeout: False
+
+===== STDOUT =====
+[0m[1m[33mwarning[0m[0m[1m: field is never read: `vec`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__unsafe_destructor__normal1.rs:10:5[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    vec: Vec<u32>,[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m    [0m[0m[1m[33m^^^^^^^^^^^^^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
+
+2026-03-01 14:49:20.365559 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:49:20.365694 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:49:20.365714 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:49:20.365717 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:49:20.365725 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:49:20.365727 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:49:20.369812 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:49:20.369866 |INFO | [rudra-progress] Rudra finished
+[0m[1m[33mwarning[0m[0m[1m: 1 warning emitted[0m
+
+
+
+===== STDERR =====

@@ -1,0 +1,22 @@
+case_id: tests__send_sync__wild_channel.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.088544
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:40:34.454549 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:40:34.454683 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:40:34.454697 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:40:34.454708 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:40:34.458524 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:40:34.458555 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:40:34.458574 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:40:34.458585 |INFO | [rudra-progress] Rudra finished
+Warning (SendSyncVariance:/ApiSyncforSync/NaiveSyncForSync): Suspicious impl of `Sync` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__send_sync__wild_channel.rs:13:1: 13:58
+unsafe impl<P: Sync, Q: Send> Sync for Container<P, Q> {}
+
+
+===== STDERR =====

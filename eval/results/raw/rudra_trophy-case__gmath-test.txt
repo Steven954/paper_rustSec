@@ -1,0 +1,34 @@
+case_id: trophy-case__gmath-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.912450
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:13:26.037280 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:13:26.412992 |INFO | [rudra-progress] Running rudra for target bin:gmath-test
+2026-03-01 14:13:27.437155 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:13:27.437285 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:13:27.437354 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:13:27.437356 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:13:27.437430 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:13:27.437445 |INFO | [rudra-progress] Rudra finished
+[0m[1m[33mwarning[0m[0m[1m: unused import: `gmath::dealloc`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:1:5[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1[0m[0m [0m[0m[1m[38;5;12m| [0m[0muse gmath::dealloc;[0m
+[0m  [0m[0m[1m[38;5;12m| [0m[0m    [0m[0m[1m[33m^^^^^^^^^^^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
+
+2026-03-01 14:13:27.789326 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:13:27.789509 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:13:27.789575 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:13:27.789589 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:13:27.792912 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:13:27.792937 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:13:27.829905 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

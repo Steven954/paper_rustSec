@@ -1,0 +1,25 @@
+case_id: tests__send_sync__okay_phantom.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.189353
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:34:35.262806 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:34:35.262982 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:34:35.262998 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:34:35.263001 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:34:35.263082 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:34:35.263100 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:34:35.263104 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:34:35.263106 |INFO | [rudra-progress] Rudra finished
+Info (SendSyncVariance:/NaiveSendForSend): Suspicious impl of `Send` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__send_sync__okay_phantom.rs:15:1: 15:62
+unsafe impl<'a, A: Send, B, C> Send for Atom1<'a, A, B, C> {}
+Info (SendSyncVariance:/NaiveSyncForSync): Suspicious impl of `Sync` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__send_sync__okay_phantom.rs:16:1: 16:62
+unsafe impl<'a, A: Sync, B, C> Sync for Atom1<'a, A, B, C> {}
+
+
+===== STDERR =====

@@ -1,0 +1,20 @@
+case_id: trophy-case__bytemuck-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 4.466963
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:11:03.288831 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:11:05.106259 |INFO | [rudra-progress] Running rudra for target bin:bytemuck-test
+2026-03-01 14:11:06.544055 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:11:06.544153 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:11:06.544223 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:11:06.544236 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:11:06.544246 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:11:06.544248 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:11:06.595989 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

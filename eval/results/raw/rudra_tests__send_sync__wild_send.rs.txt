@@ -1,0 +1,22 @@
+case_id: tests__send_sync__wild_send.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.051181
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:43:00.618287 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:43:00.618399 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:43:00.618404 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:43:00.618406 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:43:00.618440 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:43:00.618452 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:43:00.618456 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:43:00.618466 |INFO | [rudra-progress] Rudra finished
+Error (SendSyncVariance:/PhantomSendForSend/NaiveSendForSend/RelaxSend): Suspicious impl of `Send` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__send_sync__wild_send.rs:9:1: 9:40
+unsafe impl<P: Ord> Send for Atom<P> {}
+
+
+===== STDERR =====

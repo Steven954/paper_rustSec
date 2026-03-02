@@ -1,0 +1,3 @@
+[0m[0m[1m[33mwarning[0m[1m:[0m apron octagons sources not found; skipping octagons backend
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.90s
+fatal error: Could not obtain Cargo metadata; likely an ill-formed manifest

@@ -1,0 +1,19 @@
+case_id: trophy-case__executable-memory-test
+tool: ffichecker
+success: True
+exit_code: 0
+duration_sec: 8.367166
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.81s
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.92s
+[0m[0m[1m[32m   Compiling[0m winapi v0.3.9
+[0m[0m[1m[32m   Compiling[0m libc v0.2.85
+[0m[0m[1m[32m   Compiling[0m executable_memory v0.1.2
+[0m[0m[1m[32m   Compiling[0m executable-memory-test v0.1.0 (/workspace/examples/_eval_runner/trophy-case__executable-memory-test)
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 2.65s
++ "/workspace/target/release/analyzer" "--precision_filter" "low"
+
+
+===== STDERR =====

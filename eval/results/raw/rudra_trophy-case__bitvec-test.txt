@@ -1,0 +1,20 @@
+case_id: trophy-case__bitvec-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 9.462980
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:08:38.369263 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:08:41.776956 |INFO | [rudra-progress] Running rudra for target bin:bitvec-test
+2026-03-01 14:08:46.739723 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:08:46.739844 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:08:46.739900 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:08:46.739902 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:08:46.739909 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:08:46.739911 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:08:46.782802 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

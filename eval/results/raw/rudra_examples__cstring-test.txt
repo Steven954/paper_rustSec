@@ -1,0 +1,21 @@
+case_id: examples__cstring-test
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.527821
+timeout: False
+
+===== STDOUT =====
+2026-03-01 13:54:19.345905 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 13:54:19.716184 |INFO | [rudra-progress] Running rudra for target bin:cstring-test
+2026-03-01 13:54:20.833938 |INFO | [rudra-progress] Rudra started
+2026-03-01 13:54:20.834090 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 13:54:20.834140 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 13:54:20.834152 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 13:54:20.834583 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 13:54:20.834611 |INFO | [rudra-progress] Rudra finished
+2026-03-01 13:54:20.868091 |WARN | [cargo_rudra] Target custom-build:build-script-build is not supported
+2026-03-01 13:54:20.868142 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

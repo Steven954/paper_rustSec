@@ -1,0 +1,20 @@
+case_id: tests__unsafe-bugs__double-free
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.440951
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:07:33.214184 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:07:33.569987 |INFO | [rudra-progress] Running rudra for target bin:double-free
+2026-03-01 14:07:34.522266 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:07:34.522374 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:07:34.522381 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:07:34.522383 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:07:34.534185 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:07:34.534219 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:07:34.573792 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

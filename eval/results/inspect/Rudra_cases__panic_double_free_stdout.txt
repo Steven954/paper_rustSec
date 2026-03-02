@@ -1,0 +1,19 @@
+2026-03-01 09:30:49.702587 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 09:30:50.028311 |INFO | [rudra-progress] Running rudra for target bin:panic_double_free
+2026-03-01 09:30:50.907589 |INFO | [rudra-progress] Rudra started
+2026-03-01 09:30:50.907703 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 09:30:50.908073 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 09:30:50.908100 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 09:30:50.908437 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 09:30:50.908461 |INFO | [rudra-progress] Rudra finished
+Warning (UnsafeDataflow:/ReadFlow): Potential unsafe dataflow issue in `bad`
+-> src/main.rs:4:1: 10:2
+pub fn bad<F: FnOnce(String)>(s: String, f: F) {
+    unsafe {
+        let dup = [0m[31mptr::read(&s)[0m; // duplicate ownership of s
+        [0m[36mf(dup)[0m; // user-provided closure may panic while owning dup
+        std::mem::forget(s); // avoid double free on normal path
+    }
+}
+[0m
+2026-03-01 09:30:50.942174 |INFO | [rudra-progress] cargo rudra finished

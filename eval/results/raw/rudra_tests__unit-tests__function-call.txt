@@ -1,0 +1,27 @@
+case_id: tests__unit-tests__function-call
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.372179
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:05:41.832035 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:05:42.174334 |ERROR| [rudra-progress] Could not obtain Cargo metadata
+Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `function-call v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__function-call)`
+
+Caused by:
+  failed to load source for dependency `macros`
+
+Caused by:
+  Unable to update /tmp/rudra-repo/macros
+
+Caused by:
+  failed to read `/tmp/rudra-repo/macros/Cargo.toml`
+
+Caused by:
+  No such file or directory (os error 2)
+
+
+
+===== STDERR =====

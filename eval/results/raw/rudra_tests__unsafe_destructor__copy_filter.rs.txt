@@ -1,0 +1,19 @@
+case_id: tests__unsafe_destructor__copy_filter.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.052981
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:45:30.709153 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:45:30.709300 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:45:30.709316 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:45:30.709320 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:45:30.709352 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:45:30.709364 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:45:30.709758 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:45:30.709781 |INFO | [rudra-progress] Rudra finished
+
+
+===== STDERR =====

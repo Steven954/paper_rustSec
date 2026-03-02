@@ -1,0 +1,20 @@
+case_id: tests__unit-tests__empty
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.671509
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:05:19.622964 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:05:20.121255 |INFO | [rudra-progress] Running rudra for target bin:empty
+2026-03-01 14:05:21.086960 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:05:21.087057 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:05:21.087176 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:05:21.087191 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:05:21.087200 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:05:21.087201 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:05:21.118788 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

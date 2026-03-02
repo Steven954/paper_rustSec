@@ -1,0 +1,17 @@
+case_id: trophy-case__runes-test
+tool: ffichecker
+success: True
+exit_code: 0
+duration_sec: 5.149259
+timeout: False
+
+===== STDOUT =====
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.82s
+[0m[0m[1m[32m    Finished[0m release [optimized] target(s) in 0.83s
+[0m[0m[1m[32m   Compiling[0m runes v0.2.5
+[0m[0m[1m[32m   Compiling[0m runes-test v0.1.0 (/workspace/examples/_eval_runner/trophy-case__runes-test)
+[0m[0m[1m[32m    Finished[0m dev [unoptimized + debuginfo] target(s) in 1.07s
++ "/workspace/target/release/analyzer" "--precision_filter" "low"
+
+
+===== STDERR =====

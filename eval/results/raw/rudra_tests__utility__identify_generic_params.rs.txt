@@ -1,0 +1,27 @@
+case_id: tests__utility__identify_generic_params.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.181040
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:53:18.653306 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:53:18.653506 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:53:18.653524 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:53:18.653528 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:53:18.657514 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:53:18.657558 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:53:18.657571 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:53:18.657583 |INFO | [rudra-progress] Rudra finished
+Warning (SendSyncVariance:/PhantomSendForSend/NaiveSendForSend): Suspicious impl of `Send` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__utility__identify_generic_params.rs:9:1: 10:39
+unsafe impl<'a, F: Send> Send for My<i32, F> // F.index = 1
+    where F: Fn(&'a u32) -> &'a u32 {}
+Info (SendSyncVariance:/NaiveSyncForSync): Suspicious impl of `Sync` found
+-> /tmp/rudra-repo/tests/_eval_runner/tests__utility__identify_generic_params.rs:12:1: 13:33
+unsafe impl<F: Sync> Sync for My<i32, F> // F.index = 0
+    where F: Fn(&u32) -> &u32 {}
+
+
+===== STDERR =====

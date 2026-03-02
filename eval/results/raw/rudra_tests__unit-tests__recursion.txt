@@ -1,0 +1,20 @@
+case_id: tests__unit-tests__recursion
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 2.539465
+timeout: False
+
+===== STDOUT =====
+2026-03-01 14:06:45.446875 |INFO | [rudra-progress] Running cargo rudra
+2026-03-01 14:06:45.857070 |INFO | [rudra-progress] Running rudra for target bin:recursion
+2026-03-01 14:06:46.751943 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:06:46.752079 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:06:46.752159 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:06:46.752173 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:06:46.752183 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:06:46.752193 |INFO | [rudra-progress] Rudra finished
+2026-03-01 14:06:46.787983 |INFO | [rudra-progress] cargo rudra finished
+
+
+===== STDERR =====

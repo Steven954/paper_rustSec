@@ -1,0 +1,47 @@
+case_id: tests__panic_safety__order_safe_loop.rs
+tool: rudra
+success: True
+exit_code: 0
+duration_sec: 1.031213
+timeout: False
+
+===== STDOUT =====
+[0m[1m[33mwarning[0m[0m[1m: unused variable: `item`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__order_safe_loop.rs:11:9[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m11[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    for item in iter {[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m        [0m[0m[1m[33m^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_item`[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_variables)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__order_safe_loop.rs:10:57[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m| [0m[0mfn test_order_safe_loop<I: Iterator<Item = impl Debug>>(mut iter: I) {[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m                                                        [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m                                                        [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m                                                        [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_mut)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: function is never used: `test_order_safe_loop`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0m/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__order_safe_loop.rs:10:4[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m| [0m[0mfn test_order_safe_loop<I: Iterator<Item = impl Debug>>(mut iter: I) {[0m
+[0m   [0m[0m[1m[38;5;12m| [0m[0m   [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
+
+2026-03-01 14:22:23.366079 |INFO | [rudra-progress] Rudra started
+2026-03-01 14:22:23.366198 |INFO | [rudra-progress] UnsafeDestructor analysis started
+2026-03-01 14:22:23.366212 |INFO | [rudra-progress] UnsafeDestructor analysis finished
+2026-03-01 14:22:23.366215 |INFO | [rudra-progress] SendSyncVariance analysis started
+2026-03-01 14:22:23.366276 |INFO | [rudra-progress] SendSyncVariance analysis finished
+2026-03-01 14:22:23.366299 |INFO | [rudra-progress] UnsafeDataflow analysis started
+2026-03-01 14:22:23.366873 |INFO | [rudra-progress] UnsafeDataflow analysis finished
+2026-03-01 14:22:23.366893 |INFO | [rudra-progress] Rudra finished
+[0m[1m[33mwarning[0m[0m[1m: 3 warnings emitted[0m
+
+
+
+===== STDERR =====
