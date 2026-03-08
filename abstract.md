@@ -1,0 +1,15 @@
+# 摘要 (Abstract)
+
+## 中文摘要
+
+Rust 语言通过编译期所有权与借用检查在默认情况下保障内存安全，但当程序发生恐慌（panic）并触发栈展开时，异常控制流与析构（Drop）、不安全代码（unsafe）及外部函数接口（FFI）的交互会引入隐蔽的内存安全风险，包括双重释放、释放后使用与跨边界未定义行为等。现有针对 Rust 的静态分析工具在围绕 panic/展开语义的系统性评测与能力边界归纳方面仍存在空白。本文针对 Rust 非正常控制流下的内存安全问题，从触发点、资源状态与边界位置三个维度建立场景化分类体系，将典型问题归纳为四类场景：Drop 执行中途发生 panic（S1）、未初始化或部分初始化状态下 panic 中断（S2）、panic 跨 FFI 边界传播（S3）、自定义资源清理逻辑中发生 panic（S4），并给出各场景的触发机制、内在原理与典型后果。在此基础上，本文构建了基于场景分类的静态分析工具评测框架，设计涵盖检出率、精确率、漏报率、可运行率及场景感知指标等的指标体系，并对 Rudra、MirChecker、FFIChecker 三款代表性工具在非正常控制流相关用例上进行系统评测。实验从覆盖度、漏报、误报与可运行性等维度给出对比结论与能力边界图谱，揭示了现有工具在异常路径建模、Drop 链与 FFI 边界等处的优势与盲区。本文的贡献包括：面向非正常控制流的漏洞场景分类与机制分析、可复现的评测框架与能力边界评估方法，以及面向工具改进与工程实践的建议，为 Rust 恐慌安全性研究与静态分析工具选型与优化提供参考。
+
+**关键词**：Rust；恐慌（panic）；非正常控制流；Drop；unsafe；FFI；静态分析；能力边界；漏洞挖掘
+
+---
+
+## English Abstract
+
+The Rust language provides memory safety by default through compile-time ownership and borrowing checks; however, when a program panics and triggers stack unwinding, the interaction of abnormal control flow with destructors (Drop), unsafe code, and the Foreign Function Interface (FFI) introduces hidden memory-safety risks, including double free, use-after-free, and cross-boundary undefined behavior. Existing static analysis tools for Rust still lack systematic evaluation and summarization of capability boundaries centered on panic/unwinding semantics. This thesis addresses memory-safety issues under abnormal control flow in Rust by establishing a scenario-based classification framework along three dimensions—trigger points, resource state, and boundary location—and categorizing typical issues into four scenarios: panic during Drop execution (S1), panic in uninitialized or partially initialized state (S2), panic propagation across FFI boundaries (S3), and panic in custom resource cleanup logic (S4), with the triggering mechanisms, underlying principles, and typical consequences of each scenario clarified. On this basis, an evaluation framework for static analysis tools grounded in scenario classification is built, with an indicator system covering detection rate, precision, false negative rate, executability, and scenario-aware metrics. A systematic evaluation of three representative tools—Rudra, MirChecker, and FFIChecker—is conducted on abnormal-control-flow-related test cases. Experiments yield comparative conclusions and a capability-boundary map from the perspectives of coverage, missed detections, false positives, and runnability, revealing both strengths and blind spots of existing tools in modeling exception paths, Drop chains, and FFI boundaries. The contributions of this thesis include: vulnerability scenario classification and mechanism analysis for abnormal control flow, a reproducible evaluation framework and capability-boundary assessment method, and recommendations for tool improvement and engineering practice, providing reference for Rust panic-safety research and the selection and optimization of static analysis tools.
+
+**Keywords**: Rust; panic; abnormal control flow; Drop; unsafe; FFI; static analysis; capability boundary; vulnerability mining
