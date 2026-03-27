@@ -1,0 +1,195 @@
+{
+  "timestamp_utc": "2026-03-27T14:41:58+00:00",
+  "seed": 42,
+  "requested_n": 20,
+  "actual_n": 20,
+  "sample_scope": "runnable",
+  "quotas": {
+    "S1": 1,
+    "S2": 13,
+    "S3": 4,
+    "S4": 2
+  },
+  "selected_cases": [
+    {
+      "case_id": "tests__unsafe-bugs__double-free",
+      "scenario": "S1",
+      "fault_type": "double_free",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__unsafe-bugs__double-free",
+      "selection_order": 1
+    },
+    {
+      "case_id": "tests__unit-tests__array",
+      "scenario": "S2",
+      "fault_type": "unit_test",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__unit-tests__array",
+      "selection_order": 2
+    },
+    {
+      "case_id": "tests__safe-bugs__integer-overflow",
+      "scenario": "S2",
+      "fault_type": "integer_overflow",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__safe-bugs__integer-overflow",
+      "selection_order": 3
+    },
+    {
+      "case_id": "tests__unit-tests__assignment",
+      "scenario": "S2",
+      "fault_type": "unit_test",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__unit-tests__assignment",
+      "selection_order": 4
+    },
+    {
+      "case_id": "tests__unit-tests__widen-narrow",
+      "scenario": "S2",
+      "fault_type": "unit_test",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__unit-tests__widen-narrow",
+      "selection_order": 5
+    },
+    {
+      "case_id": "trophy-case__runes-test",
+      "scenario": "S2",
+      "fault_type": "trophy_case",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/trophy-case__runes-test",
+      "selection_order": 6
+    },
+    {
+      "case_id": "tests__unit-tests__iterator",
+      "scenario": "S2",
+      "fault_type": "unit_test",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__unit-tests__iterator",
+      "selection_order": 7
+    },
+    {
+      "case_id": "trophy-case__spglib-test",
+      "scenario": "S2",
+      "fault_type": "trophy_case",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/trophy-case__spglib-test",
+      "selection_order": 8
+    },
+    {
+      "case_id": "tests__unit-tests__vector",
+      "scenario": "S2",
+      "fault_type": "unit_test",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__unit-tests__vector",
+      "selection_order": 9
+    },
+    {
+      "case_id": "tests__safe-bugs__out-of-bound-index",
+      "scenario": "S2",
+      "fault_type": "bounds_error",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__safe-bugs__out-of-bound-index",
+      "selection_order": 10
+    },
+    {
+      "case_id": "trophy-case__executable-memory-test",
+      "scenario": "S2",
+      "fault_type": "trophy_case",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/trophy-case__executable-memory-test",
+      "selection_order": 11
+    },
+    {
+      "case_id": "tests__unit-tests__recursion",
+      "scenario": "S2",
+      "fault_type": "unit_test",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__unit-tests__recursion",
+      "selection_order": 12
+    },
+    {
+      "case_id": "tests__unit-tests__big-loop",
+      "scenario": "S2",
+      "fault_type": "unit_test",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__unit-tests__big-loop",
+      "selection_order": 13
+    },
+    {
+      "case_id": "trophy-case__brotli-test2",
+      "scenario": "S2",
+      "fault_type": "trophy_case",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/trophy-case__brotli-test2",
+      "selection_order": 14
+    },
+    {
+      "case_id": "examples__string-test",
+      "scenario": "S3",
+      "fault_type": "ffi_example",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/examples__string-test",
+      "selection_order": 15
+    },
+    {
+      "case_id": "examples__rc-test",
+      "scenario": "S3",
+      "fault_type": "ffi_example",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/examples__rc-test",
+      "selection_order": 16
+    },
+    {
+      "case_id": "examples__mix-box-free",
+      "scenario": "S3",
+      "fault_type": "ffi_example",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/examples__mix-box-free",
+      "selection_order": 17
+    },
+    {
+      "case_id": "examples__c-in-rust-uaf",
+      "scenario": "S3",
+      "fault_type": "use_after_free",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/examples__c-in-rust-uaf",
+      "selection_order": 18
+    },
+    {
+      "case_id": "trophy-case__gmath-test",
+      "scenario": "S4",
+      "fault_type": "trophy_case",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/trophy-case__gmath-test",
+      "selection_order": 19
+    },
+    {
+      "case_id": "tests__unsafe-bugs__offset",
+      "scenario": "S4",
+      "fault_type": "unsafe_bug",
+      "case_kind": "cargo_bin",
+      "supported_on_host": true,
+      "case_path": "testcases/tests__unsafe-bugs__offset",
+      "selection_order": 20
+    }
+  ]
+}

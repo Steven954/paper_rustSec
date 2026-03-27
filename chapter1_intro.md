@@ -14,96 +14,123 @@
 
 综上所述，作为新兴的安全系统编程范式和未来基础设施的重要发展方向，Rust在应用过程中仍面临严峻的安全边界与异常控制流挑战，尤其是unsafe漏洞与Panic引发的拒绝服务风险。因此，深入研究该语言特性下漏洞触发的边界，开发更具针对性和高效性的跨中间表示分析与自动化验证手段，以及探索对系统可用性影响较小且更可靠的架构级防御策略，均具有重要的理论与实践意义。
 
-## 1.2 国内外研究现状及分析
+## 1.2 国内外研究现状
 
-过去数十年间，C 与 C++ 作为现代软件工程的基石，主导了从操作系统内核、数据库到编译器的底层系统开发。然而，依赖开发者手动管理内存的编程范式直接导致了缓冲区溢出、释放后使用（Use-After-Free, UAF）、双重释放以及悬垂指针等严重的内存安全漏洞。据美国国家网络总监办公室（ONCD）及国防部最新统计，内存安全漏洞是目前全球已披露软件漏洞中最普遍的类别，常引发未定义行为（Undefined Behavior, UB），为针对关键基础设施的网络攻击提供可乘之机。传统静态分析工具（如 clang-tidy、Coverity）和动态模糊测试虽在一定程度上缓解了缺陷，但因 C/C++ 缺乏严格的内存安全语义，始终无法从根本上消除隐患。
+### 1.2.1 宏观安全背景
 
-在此背景下，Rust 编程语言异军突起。Rust 在不引入垃圾回收（GC）且不牺牲运行时性能的前提下，通过编译期严格的所有权模型、借用检查器与生命周期语义，提供了内存安全与数据竞争自由的并发安全保证。然而，Rust 生态系统并非完全安全：为满足底层硬件控制需求，Rust 提供了 unsafe 关键字；同时，其“快速失败”（Fail-fast）理念在遇到异常时会触发 Panic，这在阻断潜在内存破坏的同时，又在大型分布式系统中引入了拒绝服务（DoS）问题。近年来，学术界与工业界围绕 Rust 的内存安全边界、Panic 运行时异常、大规模自动化检测以及形式化验证开展了较多研究。本节将从四个核心维度系统梳理该领域的发展脉络与最新研究现状。
+在过去的数十年中，软件系统的复杂性呈指数级增长，而内存安全漏洞始终是系统安全领域面临的最核心威胁。根据美国国家安全局（NSA）、网络安全和基础设施安全局（CISA）以及 Google、Microsoft 等行业巨头的持续追踪与统计，在基于 C/C++ 等非内存安全语言（Memory-Unsafe Languages）编写的底层系统软件中，约 70% 的严重高危漏洞（CVE）均直接根源于内存安全问题[2][7][8]。2024 年初，美国白宫国家网络总监办公室（ONCD）发布报告，正式呼吁全球软件供应商向内存安全语言（Memory-Safe Languages, MSL）迁移，这标志着内存安全已从单纯的工程技术问题上升为国家级的网络安全战略[1]。学术界与工业界通常将内存安全违规划分为两大核心类别：空间内存安全（Spatial Memory Safety）与时间内存安全（Temporal Memory Safety）[4][10]。空间内存安全漏洞主要发生于程序在访问内存对象时，突破了合法的物理或逻辑边界（如经典的缓冲区溢出、越界读写）；时间内存安全漏洞则涉及对内存对象生命周期的非法访问（如释放后使用 UAF、二次释放、悬挂指针）。传统防御机制（如 ASLR、DEP、Stack Canary）主要依赖于概率性或运行时的缓解，无法从根源上消除漏洞[4]。在这一背景下，Rust 语言作为一门注重安全性、并发性和高性能的系统级编程语言应运而生[3][6]。Rust 通过其独创的“所有权（Ownership）”模型、严格的“借用检查器（Borrow Checker）”以及生命周期（Lifetime）推导机制，在编译期强制实现了别名与可变性的互斥（Aliasing XOR Mutability, AXM），从而在零运行时开销（Zero-cost Abstraction）的前提下，从数学和语义层面根除了安全 Rust（Safe Rust）代码中的空间与时间内存漏洞以及数据竞争。然而，为了满足底层系统编程对硬件操控、性能优化以及与 C/C++ 遗留生态互操作的需求，Rust 引入了“不安全（unsafe）”关键字。unsafe 块允许开发者绕过编译器的借用检查，执行解引用裸指针、调用外部函数接口（FFI）等高危操作。大量实证研究表明，Rust 项目中绝大多数的内存安全漏洞和系统崩溃，均直接或间接源于对 unsafe 机制的滥用或封装不当[5][9]。因此，针对 Rust（尤其是 unsafe 边界与 FFI）的自动化程序分析与漏洞检测，已成为当前国内外系统安全领域最前沿的研究热点。
 
-### 1.2.1 Rust 内存安全的实证研究
+### 1.2.2 静态分析技术
 
-任何编程语言的安全体系都建立在其开发者生态的实际编程模式之上。由于 Rust 强行将安全责任在编译器（Safe Rust）与开发者（Unsafe Rust）之间进行了划分，针对其真实世界代码中潜伏缺陷的宏观实证研究（Empirical Studies）成为了后续开发检测工具的基础。
+静态应用程序安全测试（SAST）是在不执行目标代码的情况下，通过分析源代码或中间表示（IR）来发现潜在缺陷的技术。静态分析的根本优势在于其能够实现安全左移，但其不可避免地受到经典停机问题的限制，难以在声音性（不漏报）与完备性（不误报）之间取得完美平衡。静态分析的核心算法瓶颈在于指针分析（Pointer Analysis）与别名分析的精度。在 C/C++ 时代，指针分析的理论基石主要由 Andersen 算法与 Steensgaard 算法奠定。1994 年提出的 Andersen 算法采用基于子集包含的约束模型，保留了数据流的单向性，精度较高，但其最坏时间复杂度高达 $O(n^3)$，难以扩展至超大型代码库[11]。为了解决性能瓶颈，Steensgaard 在 1996 年提出基于等价类统一的算法，利用并查集将复杂度降至接近线性时间 $O(n\alpha(n))$，但双向合并导致大量虚假别名，误报率极高[12]。在此基础上，现代静态分析框架不断演进，如基于分离逻辑的 Facebook Infer[14][15]、基于 Datalog 查询图的 CodeQL，以及澳大利亚新南威尔士大学提出的 SVF（Static Value-Flow）框架[13]，后者通过构建稀疏值流图（Sparse Value-Flow Graph）实现了高精度、按需的跨过程指针分析。此外，结合归纳综合消除中间数据结构[23]以及嵌套属性图的自动化检测[22]也在不断发展。
 
-**（1）基于unsafe边界的内存漏洞实证分析**
+随着 Rust 的普及，传统的 C/C++ 静态分析工具无法直接理解 Rust 的所有权和生命周期语义。Rust 编译器前端将源代码先后降级为高级中间表示（HIR）、类型化高级中间表示（THIR）以及中级中间表示（MIR）。其中，MIR 去除了语法糖，显式化了控制流和借用检查生命周期，成为 Rust 静态漏洞挖掘的最佳介入层。针对 Rust 的静态分析研究在近几年取得了突破性进展：Rudra（SOSP 2021）：这是韩国科研团队提出的一款面向 Rust 生态系统级别的静态分析器。Rudra 工作在 HIR 和 MIR 层，创新性地定义了三种 Rust 特有的 unsafe 漏洞模式：Panic 安全漏洞、高阶不变量漏洞以及 Send/Sync 型变漏洞。Rudra 扫描了全网数万个 Crate，发现了上百个 CVE 和 RustSec 漏洞[16]。MirChecker（CCS 2021）：香港中文大学团队开发的 MirChecker 是基于抽象解释（Abstract Interpretation）理论的 Rust 静态检测工具。它在 MIR 层构建了数值与符号的约束求解模型，专门用于追踪数值溢出、越界访问以及部分生命周期破坏问题[17]。SafeDrop（TOSEM 2023）：针对 Rust 特有的基于所有权的资源管理（OBRM）机制带来的提前释放（UAF）和二次释放隐患，复旦大学和南方科技大学研究团队提出了 SafeDrop。该工具基于路径敏感的数据流分析，利用优化的 Tarjan 算法提取控制流图中的数据流别名，有效检测了由复杂分支或 Panic 解卷（Unwinding）引发的内存释放错误[18]。TYPEPULSE（USENIX Security 2025）：针对 Rust 中 `as` 和 `transmute` 等类型转换操作被滥用导致的类型混淆漏洞，清华大学与乔治梅森大学联合提出了 TYPEPULSE。该算法通过类型转换分析与指针别名分析构建属性图，能够精准检测内存对齐错误（Misalignment）、布局不一致（Inconsistent Layout）等深层内存破坏[19]。尽管静态分析在 Rust 漏洞挖掘中成果丰硕，但由于 Rust 高度依赖泛型、闭包与宏，且 unsafe 块的上下文高度复杂，辅助符号执行等混合架构以缓解路径爆炸仍是未来的重点方向[20]。
 
-Rust 的核心安全承诺建立在所有 unsafe 代码必须语义健壮的前提之上，一旦存在缺陷，整个安全抽象便会瓦解。Qin 等人发表于 PLDI 2020 并在随后扩展至顶级期刊 TSE 2024 的经典研究，对 Rust 生态中的真实漏洞进行了开创性的大规模剖析。该研究对涵盖 Servo、TiKV、Redox 等五个开源项目、五个高频基础库以及 CVE 与 RustSec 数据库中的 850 个 unsafe 使用场景和 170 个真实 Bug 进行了细致的人工审查。研究指出，尽管 Rust 编译器能拦截大部分常规错误，但开发者在追求极致的并行性能、实现跨语言外部函数接口（FFI）交互或构建复杂的自引用数据结构时，极易引入隐蔽的内存漏洞。此外，加州大学与中科大的联合研究进一步揭示，大量安全问题实质上源于开发者对 Rust 标准库中内部可变性（Interior Mutability）API（如 Cell, RefCell）的滥用，这些漏洞往往表现为深层的逻辑数据竞争。
+### 1.2.3 动态检测技术
 
-将 Rust 引入底层操作系统的进程也为实证研究提供了绝佳的工业级样本。随着 Rust-for-Linux (RFL) 项目合并入 Linux 主线，Li 等人在 USENIX ATC 2024 的研究中对过去四年内 240 个内核驱动漏洞进行了分析。分析表明：Rust 的静态检查仅能自动消除其中的 82 个基础漏洞；另有 113 个漏洞需依赖内核开发者谨慎遵循特定的 Rust 编程惯用法（如手动防止引用计数泄漏、显式整数溢出检查、正确实现复杂的 Drop 特质）才能得以避免；更严重的是，仍有 45 个涉及硬件协议违规（Protocol Violations）和深层语义错误的驱动漏洞，完全处于 Rust 安全模型所能保护的范畴之外。这一结论表明，仅靠语言设计本身不足以解决底层系统的所有安全挑战。
+与静态分析基于规则近似推演不同，动态程序分析（Dynamic Analysis）在代码实际执行过程中监控内存与指令流，具有极低的误报率。在内存检测器（Sanitizers）的发展史上，技术架构经历了从重量级二进制翻译到轻量级编译期插桩的深刻演变。1992 年问世的 Purify 开创了直接在目标代码中插入检测指令的先河，用于捕捉未初始化读取与内存泄漏[24]。随后，基于动态二进制插桩（DBI）的 Valgrind（其核心工具 Memcheck）成为业界标准，通过在虚拟机沙箱中维护影子状态实现高度精确的检测，但其粗粒度翻译带来了极高的性能开销，仅限于轻量级测试[25][30]。为了突破性能瓶颈，Google 于 2012 年推出了基于 LLVM 编译器后端的 AddressSanitizer (ASan)。ASan 通过编译期 IR 插桩，结合高效的影子内存（Shadow Memory）映射与红区（Redzone）隔离机制，将性能开销骤降至约 73%，成为现代软件工程持续集成的标配[26]。此后，HWASan（基于硬件指针标签）、MSan（未初始化检测）等相继问世，构成了庞大的 Sanitizer 生态[28][31]。近年来，清华大学张超教授团队在 USENIX Security 2023 上提出了 MTSan，通过渐进式对象恢复与定制化重写，为无源码的二进制模糊测试提供了实用的内存消毒器，弥补了 C/C++ 闭源组件的检测空白[27]；此外，针对 ARM 平台提出的 PACSan 通过硬件指针认证实现了更低开销的运行期防护[29]。在 Rust 语言生态中，由于 Safe Rust 在编译期已经保证了严格的内存安全，传统 ASan 在 Rust 中的应用主要集中于审计 unsafe 代码以及 FFI 链接的 C/C++ 底层库。然而，Rust 社区自身发展出了更符合语言语义的动态解释器——Miri。Miri 不仅是一个工具，更是 Rust 形式化语义演进的核心试验场。它直接工作在 Rust 的 MIR 中间表示层，通过拦截并解释每条 MIR 指令，不仅能够检测传统的越界、UAF 和内存泄漏，更重要的是，Miri 内建了对 Rust 借用规则的动态验证引擎。任何违反 Rust 独占可变性原则的别名操作，都会被 Miri 精确捕捉为“未定义行为（Undefined Behavior, UB）”[32]。然而，Miri 作为解释器的本质决定了其执行速度极慢，未来如何加速此类运行时内存隔离检查机制，仍是当前的重要研究课题。
 
-**（2）Panic!宏导致的DoS攻击**
+### 1.2.4 模糊测试技术
 
-在讨论 Rust 安全性时，学术界长期将注意力集中在内存破坏之上，而往往忽视了架构设计中的另一把双刃剑：Panic（运行时恐慌）安全机制。当运行时遇到潜在的破坏性操作（如数组越界、除以零）时，程序会通过 panic! 宏中止执行并展开栈（Unwinding）以清理资源。然而，在安全攸关的高可用系统中，这种“宁为玉碎”的机制直接演变成了严重的拒绝服务（DoS）攻击向量。
+模糊测试（Fuzzing）作为一种自动化的软件测试方法，通过高频次向目标程序输入变异或随机数据来诱发崩溃，极大地弥补了代码审计的不足。自 AFL 确立了覆盖率引导的灰盒模糊测试（CGF）范式以来，Fuzzing 技术在过去十年经历了飞速发展[35]。在国内，清华大学张超教授领导的团队在 Fuzzing 理论及工程上做出了世界级贡献：例如针对 AFL 哈希碰撞问题的 CollAFL（IEEE S&P 2018）[36]、解决状态空间盲区的 StateFuzz（USENIX Security 2022）[37]、基于数据流敏感的 GREYONE（USENIX Security 2020）[38]，以及目标驱动的定向模糊测试 SDFUZZ（USENIX Security 2024）[39]等，极大提升了对深层逻辑和状态机的探索能力。此外，以 xFUZZ 和 IDFUZZ 为代表的混合自适应调度框架也在最新的学术界会议（如 USENIX Security 2025, ISSTA 2025）中被广泛提出[40][41]。针对特定场景，Sysyphuzz 与 EAGLEYE 分别攻克了内核深层压力覆盖与物联网设备隐藏路由发现的难题[42][43]。在 Rust 生态中，Fuzzing 技术也得到了迅速普及，以 cargo-fuzz（基于 libFuzzer）和 afl.rs 为代表的工具已成为 Rust 开发者验证库安全性的常用手段。然而，面向 Rust 的模糊测试面临着一个核心的语义悖论：由于 Safe Rust 本身防范了内存崩溃，Fuzzer 在纯安全代码中通常只能触发安全的 Panic 或逻辑死循环，难以轻易获得可利用的段错误（Segfault）。因此，国内外研究人员开始将 Rust 模糊测试的焦点转向“定向挖掘”与大模型（LLM）增强。利用 LLM 理解 Rust 复杂的 Trait 特征与泛型约束，自动生成能够覆盖深层 unsafe API 调用的测试线束，正成为当前提升 Rust 漏洞挖掘覆盖率的有效手段。
 
-宋林海教授团队在 TSE 2024 上的研究针对 110 个导致意外 Panic 的真实编程错误进行了全景式分析，案例覆盖 Ethereum（41个）、Servo（29个）、Redox（20个）等基础设施。该研究揭示了一个值得注意的发现：与潜伏在 unsafe 块中的内存漏洞截然不同，几乎所有导致意外 Panic 的错误都发生在**安全代码（Safe Code）**之中。其核心诱发因素包括两点：一是开发者对 Rust 错误处理类型（如 Result 和 Option）的粗暴误用，为了节省代码量大量滥用 .unwrap() 或 .expect() 方法，导致遭遇空值时直接崩溃；二是隐蔽的算术溢出问题，Rust 在调试模式（Debug）下会对整数溢出触发 Panic，而在发布模式（Release）下默认采用二进制补码环绕策略，这种编译模式导致的语义差异使得部分开发者对算术操作的可靠性产生误判。这些实证研究对“Safe Rust 即完全可靠”的常见认识提出了质疑，并催生了针对 Panic 异常控制流的分析需求。
+### 1.2.5 形式验证技术
 
-### 1.2.2 基于程序分析的Rust安全漏洞自动化检测技术
+当模糊测试遭遇严格的校验和约束时极易陷入探索停滞。此时，符号执行（Symbolic Execution）技术展现出了无可替代的严谨性。符号执行的经典理论可追溯至 King 的开创性工作[45]；以 KLEE（基于 LLVM IR）和 Angr（基于二进制 VEX IR）为代表的现代符号执行引擎，为系统级程序的深层路径探索奠定了基础[46][47]。在 Rust 语言安全领域，单纯的漏洞检测已无法满足高安全核心系统（如航空航天、内核）的要求，学术界正致力于通过形式化验证（Formal Verification）从数学上证明 Rust 代码的绝对正确性。该领域的奠基性工作是发表于 POPL 2018 的 RustBelt 项目。RustBelt 在 Coq 交互式定理证明器中，利用分离逻辑框架，首次从数学上证明了 Rust 的核心类型系统以及关键 unsafe API 封装的声音性[48]。为了准确规范编译器可以对 Rust 代码进行何种优化，研究者提出了 Stacked Borrows（POPL 2020）别名模型，严格规定了借用指针的生命周期与访问权限[49]。然而，Stacked Borrows 过于严格，否定了实际工程中许多合理的指针重排优化。为此，最新的 Tree Borrows（PLDI 2025）模型将栈结构升级为树形拓扑，支持更细粒度的权限演化，成功减少了 54% 的合规代码误报[50]。在工程自动化验证工具方面，发表于 PLDI 2024 的 RefinedRust 系统将精化类型与 RustBelt 分离逻辑相结合，实现了针对安全与不安全混合 Rust 代码的半自动化底层证明生成[51]。而发表于 SOSP 2024 的 Verus 平台，则采用线性幽灵类型与底层 SMT 自动化求解相结合，其验证速度比传统工具快数倍，极大地降低了系统程序员编写形式化证明的门槛[52]。
 
-为了应对实证研究中暴露的海量脆弱性，学术界近年来密集推出了众多基于程序静态分析（Static Analysis）与动态测试（Dynamic Testing/Fuzzing）的自动化检测工具，其分析深度正从早期的抽象语法树（AST）全面下沉至底层的中间表示层（MIR 及 LLVM IR）。
+### 1.2.6 边界防护技术
 
-**（1）静态分析工具**
+工业界在短期内无法完全重写庞大的 C/C++ 历史遗产，这导致现代软件系统普遍演变为混合语言架构。在这一架构下，Rust 与 C/C++ 进行通信的唯一桥梁是外部函数接口（FFI）。然而，FFI 成为了整个系统安全链条中最脆弱的环节，通过 FFI 实施的“跨语言攻击”能够轻易击穿系统防御。为应对跨语言边界带来的内存违规，国内外的研究主要集中于以下技术路径：静态 FFI 协议检查：香港中文大学发表的 FFIChecker 工具，通过在 LLVM IR 层执行跨语言的抽象解释，专门追踪从 Rust 传递到 C 侧的指针生命周期，成功发现了包括 FFI 悬挂指针在内的多种内存错误[53]。混合语言动态 Sanitizer 优化：传统 Sanitizer 在插桩混合应用时会引入巨大的性能损耗。发表于 USENIX Security 2025 的 SafeFFI 系统提出了一种轻量级的插桩机制：仅在 Rust 的安全与不安全边界处动态插入断言检查，将编译与运行开销骤降至 2.64 倍[54]。硬件能力（Capability）隔离：新加坡国立大学提出的 CapsLock 机制（CCS 2025），借助基于能力的硬件架构，引入“使用即撤销（Revoke-on-use）”抽象，当不安全的 C/C++ 代码试图非法使用已回收的能力句柄时，硬件层直接触发异常，实现零软件开销的跨语言内存保护[55]。此外，浙江大学团队在 ISSTA 2025 发表的 Safe4U 工具则创造性地结合了静态分析与大语言模型（LLM），用于自动识别 Rust 中对 unsafe FFI 调用的“不健全安全封装”，弥补了语义理解鸿沟[56]。
 
-在静态漏洞挖掘的里程碑事件中，佐治亚理工学院 Bae 等人发表于 SOSP 2021 的 Rudra 工具（荣获杰出人工制品奖）实现了面向全生态的大规模扫描。Rudra 专为扫描 Rust 封装的 unsafe 代码中破坏内存安全的模式而设计，其核心涵盖了 Panic 安全漏洞、高阶不变式违规以及线程安全标记（Send/Sync）错误。借助启发式的数据流传播与 MIR 跟踪算法，Rudra 在 6.5 小时内便完成了对 crates.io 中全量 4.3 万个包的扫描，成功挖掘出 264 个零日漏洞，最终转化为 76 个 CVE 漏洞和 112 个 RustSec 官方安全公告（占自 2016 年以来该数据库收录漏洞的 51.6%）。Rudra 发现的缺陷较为隐蔽，部分甚至存在于 Rust 官方标准库与编译器内部。
+### 1.2.7 系统重构实践
 
-继 Rudra 之后，细分领域的静态工具百花齐放。为了精细化检测由于借用规则滥用导致的悬垂指针，哥伦比亚大学 Nitin 等人在论文（ArXiv 2023 / PLDI 扩展）中提出了 Yuga。Yuga 采用多阶段模式匹配与抽象语法树深度遍历，专门检测隐蔽的生命周期标注错误。香港中文大学团队则在 CCS 2021 推出了 MirChecker，该工具基于抽象解释理论，对 MIR 进行符号执行与约束求解，相较于 Rudra 的模式匹配，它更能精确追踪数值与指针状态，广泛捕捉包括数组越界在内的运行时 Panic 隐患与内存双重释放错误。针对跨语言（如 Rust 调用 C++）边界的盲区，该团队在 ESORICS 2022 进一步研发了 FFIChecker，利用扩展的跨语言控制流图与污点分析，系统性清查了堆内存的跨界滥用与异常（Exception/Panic）逃逸问题。
+操作系统内核是计算机科学的皇冠，近年来，伴随 Rust 的成熟，以 Rust 重构底层操作系统的浪潮正在席卷全球。在 Linux 内核的渐进式演进中，Rust-for-Linux (RFL) 项目允许开发者使用 Rust 编写设备驱动。然而，发表在 USENIX ATC 2024 上的实证研究剖析了 RFL 的阵痛：Linux 内核中充斥着 C 风格的侵入式双向链表和复杂的引用计数，这与 Rust 的独占别名规则存在严重的阻抗失配。因此，RFL 不得不在 Rust 和 C 之间构建一层厚重的绑定层，有时甚至需要牺牲开发效率[57]。为了彻底摆脱历史包袱，国内外研究团队开始探索基于 Rust 的全新 OS 架构设计。在顶会前沿，由南方科技大学、北京大学、清华大学及蚂蚁集团联合在 USENIX ATC 2025 发表的 Asterinas 内核架构，提出了革命性的 Framekernel（框架内核） 理念。Asterinas 将传统宏内核拆分为两个层级：底层的特权操作系统框架（OSTD）与上层的非特权操作系统服务。OSTD 承担了与 MMU、中断处理交互的必须使用 unsafe Rust 的核心职责，并封装为高级 API；而上层服务完全采用 Safe Rust 编写。这一设计实现了极小且可证的“可信计算基（TCB）”（TCB 仅占代码量的 14.0%）。目前 Asterinas 不仅完美兼容了 Linux 的 210 多个系统调用，且在吞吐量与性能上媲美原生 Linux C 代码，展示了软硬件隔离与语言级隔离相融合的巨大潜力[58]。
 
-**（2）动态分析工具**
+### 1.2.8 未来发展展望
 
-在动态检测层面，Rust 官方维护的 Miri 解释器扮演了核心角色。即将在 POPL 2026 发表的最新进展表明，Miri 作为一个基于 MIR 的执行引擎，已实现对 Rust 规范级内存模型的严格支持（如 Stacked Borrows 及其继任者 Tree Borrows），能够在执行期毫秒级捕获违反别名规则的数据竞态和未定义行为。然而，动态执行的主要局限在于路径覆盖率。
+综上所述，当前国内外在系统级内存安全领域的研究正处于技术范式的跨越期。从针对 C/C++ 的传统静态审计、模糊测试与动态检测，全面演变为以 Rust 为核心的新一代形式化语义约束与混合测试融合体系。未来的内存安全技术演进呈现出两大核心趋势：第一，跨语言与边界融合分析。在向全内存安全生态迁移的漫长过渡期内，面向 Rust-C/C++ FFI 边界的静态/动态协同检测技术（如 SafeFFI 与 CapsLock）将成为防御重心[54][55]。第二，软硬件协同防御的常态化。随着硬件架构的创新（如 ARM MTE 内存标签与基于微体系架构的 CHERI 处理器）走向商用，高昂的漏洞检测开销将被下沉至硅片级执行，使得实时、全局的内存安全验证不仅在应用层，更在现代 Rust 重构的操作系统内核中成为现实[59][60]。
 
-面对复杂的 Rust 项目，传统的模糊测试（Fuzzing）遭遇了严峻的“状态空间墙”：编译器为保证安全隐式插入的海量边界检查，会导致 Fuzzer 生成的绝大多数变异输入在程序入口处立刻触发毫无价值的 Panic 崩溃，使得测试引擎根本无法深入探索隐藏在深层的核心漏洞逻辑。为了打破这一僵局，香港中文大学在安全顶会 CCS 2025 上发表的 PanicKiller 在针对 Panic 安全测试方面取得了重要进展。PanicKiller 引入了先进的跨中间表示分析（Cross-IR Analysis），在 LLVM IR 与 MIR 之间建立精确映射，分离出安全检查保护路径与裸露的 unsafe 区域。其采用新颖的动态污点分析算法，逆向追踪并变异与安全约束相关联的关键输入字节。在基准评估中，PanicKiller 将真实漏洞暴露速度提升约 22 倍，将无效的假阳性 Panic 崩溃报告削减约 18.2 倍，并在部分 Rust 开源库中挖掘出 53 个先前未知的漏洞（其中 11 个获 RustSec 编号）。在工业界，华为安全团队研发了基于“选择性代码覆盖率反馈”的架构，通过修改 rustc 的插桩机制，将 Fuzzing 算力集中用于 unsafe 区域，提升了企业级代码库的检出率。
+本节参考文献
 
-### 1.2.3 Rust底层系统的形式化验证与证明
-
-随着 Rust 接管极度敏感的航空航天、汽车电子与金融交易底座，业界对于代码质量的诉求已由“通过测试”升级为基于数学与数理逻辑的形式化验证（Formal Verification）。当前，针对 Rust 的形式化方法已经从底层的语义奠基，全面开枝散叶至自动化演绎验证与有界模型检查。
-
-**（1）语言级核心内存模型**
-
-在自动化工具诞生之前，必须首先从纯理论上证明 Rust 语言设计的核心主张是自洽的。长期以来，Rust 标准库中多线程共享的 Arc、互斥锁 Mutex 等底层极度依赖 unsafe 指针操作，学术界曾对其安全性持保留态度。Jung 等人在 POPL 2018 发表的 RustBelt 具有重要的奠基意义。研究团队为 Rust 的核心子集（λRust）构建了机器检查的完备形式化安全证明，并依托强大且语言无关的 Iris 高阶并发分离逻辑框架，推导出专属于 Rust 的“生命周期逻辑”与“借用命题”。RustBelt 在数学上对最棘手的“内部可变性”进行了完备建模，证明了只要标准库的 unsafe 实现满足特定验证条件，向外暴露的 API 在满足其验证条件时不会破坏全局安全。
-
-随着编译器优化的深入，别名模型（Aliasing Model）成为验证关键。为解决早期 Stacked Borrows 模型过于严格而误伤大量真实世界高频 unsafe 模式的缺陷，Jung 团队在 PLDI 2025 上最新发表了 Tree Borrows 理论。顾名思义，Tree Borrows 用树形结构取代了原来的栈，在对 30,000 个顶级 crate 的评估中，其对真实世界代码的排斥率大幅降低了 54%，并在 Rocq 定理证明器中严格证明了其不仅能维持原有的优化强度，还能支持较复杂的读-读重排序（Read-read reorderings）等编译优化，为下一代 Rust 内存验证提供了重要基础。
-
-**（2）自动化演绎验证**
-
-基于夯实的底层逻辑，旨在降低普通开发者使用门槛的演绎验证引擎（Deductive Verification）取得了爆发式进展。苏黎世联邦理工学院的 Prusti 项目（NASA Formal Methods 2022）从 Rust 实验性借用检查器（Polonius）中直接提取所有权与生命周期信息，构建“重借用有向无环图”并转化为 Viper 底层逻辑验证语言。Prusti 赋予了开发者“自主动”（Auto-active）验证体验，通过 #[requires] 与 #[ensures] 等契约宏，或在零标注模式下，即可在编译期发现潜在的整数溢出和显式 Panic 崩溃。
-
-为了进一步处理系统级代码的复杂性，微软与卡内基梅隆大学在 SOSP 2024 联合推出了 Verus 工具。Verus 的架构创新在于引入了线性幽灵类型（Linear Ghost Types），使其能够无缝契合 Rust 本身的借用规则来操作虚拟权限。该引擎的执行效率较高，在验证复杂的并发内存分配器和页面表等系统时，性能较传统基线工具有明显提升（约 3 至 61 倍），且验证时间随状态增长保持线性扩展（如链表操作仅需 1.6ms/push），目前已被应用于亚马逊和微软的核心生产线。在理论路线上，Aeneas（ICFP 2022）提出了“纯函数式转换”范式。Aeneas 摒弃了基于堆内存分离逻辑的推理方式，利用“反向函数”（Backward Functions）技术处理借用生命周期终止问题，将 LLBC 中间表示翻译为纯 λ 演算并导入 Lean 或 Coq 等定理证明器进行推导，完成了针对 Rust 复杂哈希表的功能正确性证明。此外，基于 OCaml/Why3 开发的 Creusot 工具（POPL 2026 Tutorial）则通过成熟的“幽灵代码”（Ghost Code）机制，证明了包含红黑树在内的极致复杂数据结构的正确性。
-
-**（3）有界模型检查**
-
-在工业界，Amazon 主导开源了 Kani Rust Verifier。Kani 运用有界模型检查（BMC）结合 CBMC 和 SAT/SMT 底层求解器，通过 kani::any() 等符号变量执行，能在不到一秒钟内穷举高达 2^192 种状态路径的极端输入。当前，依托 Kani 与 Creusot 的混合能力，AWS 与 Rust 基金会正在推进“Rust 标准库众包验证计划”（Verify Rust Std Project），旨在对 BTreeMap 节点、VecDeque 及底层指针算术等标准库组件的内存安全性进行系统性验证，以降低标准库内部 unsafe 代码带来的信任风险。
-
-### 1.2.4 大语言模型赋能安全操作系统架构创新
-
-随着数理逻辑验证逐渐逼近天花板，如何处理遗留的庞大 C/C++ 代码山以及如何利用 Rust 构建具备极致容错能力的整机操作系统，成为当前最前沿的交叉研究阵地。
-
-**（1）AI 驱动的代码自动安全转译**
-
-在全球安全防御战略的范式转移中，美国国防高级研究计划局（DARPA）于 2024 年正式启动了 TRACTOR（Translating All C to Rust）项目。该计划摒弃了 c2rust 这类单纯的语法树机械转换路线（机械转换易产生大量难以维护的 unsafe 块），转而探索大语言模型（LLMs）与静态控制流分析、动态执行路径追踪的结合。TRACTOR 旨在实现具备较好语义理解能力的代码翻译系统，其输出要求逻辑等价并尽量符合 Idiomatic Rust 的书写规范，以降低底层遗留系统的内存脆弱性。
-
-在国内，华为（Huawei）等企业的可信软件工程实验室提出了融合智能的“可信编程”框架。华为将抽象语法树（AST，基于 tree-sitter）与定制化深度神经网络相结合（Deep Code Learning）。该模型通过海量吞吐高质量 Rust 开源代码库，已能在开发者敲击键盘的瞬间，智能预测在时间复杂度与内存边界上最安全的算法分支，其代码结构推荐的初始准确率已稳定超过 85.5%。同时，中国科学技术大学与清华大学的研究者从宏观方法论出发，在《信息安全学报》上首次提出了集“预警-拦截-修补”于一体的 CAL 原则（Comprehensiveness 全面性, Automation 自动化, Lifecycle 全生命周期监控），为下一代 Rust 生态防线确立了分类学基准。
-
-**（2）操作系统架构创新**
-
-Rust 在系统级编程上的终极应用是重写操作系统（OS）。尽管以 Linux 为核心的 RFL 计划不断推进，但其深层受制于庞大 C 语言历史包袱所造成的巨大 TCB（可信计算基）污染。为此，发表于 ASPLOS 2024 以及 USENIX ATC 2025 的 Asterinas 操作系统提出了 Framekernel（框架内核）架构。
-
-Asterinas 在完全兼容 Linux ABI 的前提下，利用 Rust 语言特性将内核严格划分为两层：“特权 OS 框架”（Privileged OS Framework）与“去特权 OS 服务”（De-privileged OS Services）。其核心设计原则是极小化 TCB 大小并追求较高的健全性（Soundness）：框架层垄断所有必需的 unsafe 硬件操作（如 MMIO、页表和 DMA 隔离），并将其包装成形式化验证过或经过严苛审计的 Safe API；其上的所有驱动和服务（包括网络栈和文件系统）都被强制降级，必须完全使用 100% 的 Safe Rust 编写。这一基于资源中心视角（CPU、内存隔离）的设计，从架构层面上切断了由设备驱动引发的 Panic 或内存越界对内核核心的破坏能力。结合国内外同步演进的 Thetis 强化框架（致力于通过语义替换压缩和封装底层内部不安全片段），基于 Rust 的下一代基础设施不仅在编译时拦截了绝大多数人为缺陷，并在架构层面增强了应对硬件与逻辑侧信道等攻击的弹性。
+1. ONCD. *Back to the Building Blocks: A Path Toward Secure and Measurable Software.* 2024.
+2. CISA, NSA, FBI, et al. *The Case for Memory Safe Roadmaps.* 2023.
+3. Watson, R. N. M., et al. "It Is Time to Standardize Principles and Practices for Software Memory Safety." *Communications of the ACM*, 2025.
+4. Szekeres, L., et al. "SoK: Eternal war in memory." *IEEE S&P*, 2013.
+5. Evans, A. N., et al. "Is Rust used safely by software developers?." *ICSE*, 2020.
+6. 胡双, 华保健, 欧阳万容, 樊起亮. "Rust语言安全研究综述." *密码学报*, 2023.
+7. Microsoft. "Windows 11: The journey to security by default." *BlueHat IL*, 2023.
+8. NSA. "Software Memory Safety." *Cybersecurity Information Sheet*, 2022.
+9. Qin, B., et al. "Understanding memory and thread safety practices and issues in real-world rust programs." *PLDI*, 2020.
+10. Dietz, W., et al. "The Meaning of Memory Safety." 2018.
+11. Andersen, L. O. *Program Analysis and Specialization for the C Programming Language.* 1994.
+12. Steensgaard, B. "Points-to analysis in almost linear time." *POPL*, 1996.
+13. Sui, Y., et al. "SVF: interprocedural static value-flow analysis in LLVM." *CC*, 2016.
+14. Calcagno, C., et al. "Compositional Shape Analysis by means of Bi-Abduction." *J. ACM*, 2011.
+15. Distefano, D., et al. "Scaling static analyses at facebook." *CACM*, 2019.
+16. Bae, Y., Kim, Y., Askar, A., et al. "Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale." *SOSP*, 2021.
+17. Li, Z., Wang, J., Sun, M., et al. "MirChecker: Detecting Bugs in Rust Programs via Static Analysis." *ACM CCS*, 2021.
+18. Cui, M., Chen, C., Xu, H., et al. "SafeDrop: Detecting Memory Deallocation Bugs of Rust Programs via Static Data-Flow Analysis." *TOSEM* 32, 4. 2023.
+19. Chen, H. M., He, X., Wang, S., et al. "TYPEPULSE: Detecting Type Confusion Bugs in Rust Programs." *USENIX Security Symposium*, 2025.
+20. Aslanyan, H., et al. "Combining Static Analysis With Directed Symbolic Execution for Scalable and Accurate Memory Leak Detection." *IEEE*, 2024.
+21. Hassler, K., et al. "A Comparative Study of Fuzzers and Static Analysis Tools for Finding Memory Unsafety in C and C++." 2025.
+22. Yan, X., et al. "Automated Data Binding Vulnerability Detection for Java Web Frameworks via Nested Property Graph." *ISSTA*, 2024.
+23. Xiong, Y., et al. "Superfusion: Eliminating Intermediate Data Structures via Inductive Synthesis." *PLDI*, 2024.
+24. Hastings, R., et al. "Purify: Fast detection of memory leaks and access errors." *USENIX Winter*, 1992.
+25. Nethercote, N., et al. "Valgrind: A framework for heavyweight dynamic binary instrumentation." *PLDI*, 2007.
+26. Serebryany, K., et al. "AddressSanitizer: A Fast Address Sanity Checker." *USENIX ATC*, 2012.
+27. Chen, X., Shi, Y., Jiang, Z., et al. "MTSan: A Feasible and Practical Memory Sanitizer for Fuzzing COTS Binaries." *USENIX Security Symposium*, 2023.
+28. Vintila, E. Q., et al. "Evaluating the Effectiveness of Memory Safety Sanitizers." *IEEE S&P*, 2025.
+29. Li, Y., et al. "PACMem: Enforcing spatial and temporal memory safety via arm pointer authentication." *ACM CCS*, 2022.
+30. D'Elia, D. C., et al. "SoK: Using dynamic binary instrumentation for security." *ASIACCS*, 2019.
+31. Song, D., et al. "SoK: Sanitizing for Security." *IEEE S&P*, 2019.
+32. Jung, R. "Miri: Practical Undefined Behavior Detection for Rust." *ICOOOLPS*, 2024.
+33. Lipp, S., et al. "An Empirical Study on the Effectiveness of Static C Code Analyzers for Vulnerability Detection." 2022.
+34. Wang, J., et al. "A Comprehensive Memory Safety Analysis of Bootloaders." *NDSS*, 2025.
+35. Böhme, M., et al. "Coverage-based Greybox Fuzzing as Markov Chain." *IEEE TSE*, 2019.
+36. Gan, S., Zhang, C., et al. "CollAFL: Path Sensitive Fuzzing." *IEEE S&P*, 2018.
+37. Zhao, B., Li, Z., Qin, S., et al. "StateFuzz: System Call-Based State-Aware Linux Driver Fuzzing." *USENIX Security Symposium*, 2022.
+38. Gan, S., Zhang, C., et al. "GREYONE: Data Flow Sensitive Fuzzing." *USENIX Security Symposium*, 2020.
+39. Li, P., Meng, W., Zhang, C. "SDFUZZ: Target States Driven Directed Fuzzing." *USENIX Security Symposium*, 2024.
+40. Yu, D., et al. "xFUZZ: A Flexible Framework for Fine-Grained, Runtime-Adaptive Fuzzing Strategy Composition." *ISSTA*, 2025.
+41. Chen, Y., et al. "IDFUZZ: Intelligent Directed Grey-box Fuzzing." *USENIX Security Symposium*, 2025.
+42. Ren, Z., et al. "Sysyphuzz: the Pressure of More Coverage." *NDSS*, 2026.
+43. Liu, H., et al. "EAGLEYE: Exposing Hidden Web Interfaces in IoT Devices via Routing Analysis." *NDSS*, 2025.
+44. Chen, H., et al. "Hawkeye: Towards a Desired Directed Grey-Box Fuzzer." *ACM CCS*, 2018.
+45. King, J. C. "Symbolic Execution and Program Testing." *Communications of the ACM*, 1976.
+46. Cadar, C., et al. "KLEE: Unassisted and automatic generation of high-coverage tests for complex systems programs." *OSDI*, 2008.
+47. Baldoni, R., et al. "A Survey of Symbolic Execution Techniques." *ACM Comput. Surv.*, 2018.
+48. Jung, R., Jourdan, J. H., Krebbers, R., Dreyer, D. "RustBelt: Securing the Foundations of the Rust Programming Language." *POPL*, 2018.
+49. Jung, R., Dang, H. H., Kang, J., Dreyer, D. "Stacked Borrows: An Aliasing Model for Rust." *POPL*, 2020.
+50. Villani, N., Hostert, J., Dreyer, D., Jung, R. "Tree Borrows." *PLDI*, 2025.
+51. Gäher, L., Sammler, M., Jung, R., et al. "RefinedRust: A Type System for High-Assurance Verification of Rust Programs." *PLDI*, 2024.
+52. Lattuada, A., Hance, T., Bosamiya, J., et al. "Verus: A Practical Foundation for Systems Verification." *SOSP*, 2024.
+53. Li, Z., Wang, J., Sun, M., et al. "FFIChecker: A Static Analysis Tool For Detecting Memory Management Bugs Between Rust and C/C++." *ESORICS*, 2022.
+54. Braunsdorf, O., Lange, T., Hohentanner, K., et al. "SafeFFI: Efficient Sanitization at the Boundary Between Safe and Unsafe Code in Rust and Mixed-Language Applications." *USENIX Security Symposium*, 2025.
+55. Yu, J. Z., Han, F., Choudhury, K., et al. "Securing Mixed Rust with Hardware Capabilities (CapsLock)." *ACM CCS*, 2025.
+56. Li, H., Wang, B., Hu, X., Xia, X. "Safe4U: Identifying Unsound Safe Encapsulations of Unsafe Calls in Rust using LLMs." *ISSTA*, 2025.
+57. Li, H., Guo, L., Yang, Y., et al. "An Empirical Study of Rust-for-Linux: The Success, Dissatisfaction, and Compromise." *USENIX ATC*, 2024.
+58. Peng, Y., Tian, H., Zhang, J., et al. "ASTERINAS: A Linux ABI-Compatible, Rust-Based Framekernel OS with a Small and Sound TCB." *USENIX ATC*, 2025.
+59. Watson, R. N. M., et al. "CHERI: A Hybrid Capability-System Architecture for Scalable Software Compartmentalization." *IEEE S&P*, 2015.
+60. Xia, H., et al. "ARM MTE Performance in Practice." 2026.
 
 ## 1.3 本文主要研究内容与创新点
 
-针对上述背景与挑战，本文的研究目标是在深入剖析 Rust 恐慌（Panic）机制及其引发的异常控制流内存安全问题的基础上，提出一套系统化的方法对该类问题进行场景分类、自动化检测与能力边界评估，为 Rust 生态的安全实践提供支撑。具体而言，本研究围绕“理论分类—模型构建—工具评估”的逻辑闭环，力求达到以下三大核心目标：
+本文研究 Rust 在 panic 与栈展开（unwinding）语义下的内存不安全行为，并关注静态检测工具在该类异常路径上的适用边界。现有工作仍缺少与展开语义对齐的根因级分类与解释，以及可复现、可对比的场景化评测范式，结论易停留在“检出数量”层面的笼统比较。基于此，本文工作分两部分展开：
 
-一是建立面向 Rust 异常控制流的内存安全漏洞场景化分类体系。针对现有研究中对 Panic 安全问题语义模糊、缺乏统一界定的现状，本文全面梳理 Rust 生态中已知的由 Panic 栈展开（Unwinding）引发的漏洞案例。借鉴传统异常安全理论与 Rust 专属的内存所有权模型，构建了一套多维度的场景化分类框架（划分为 S1 至 S4 四类典型场景）。该体系刻画了各类 Panic 漏洞的触发条件、边界位置与资源状态演化逻辑（例如 Panic 导致的资源析构顺序紊乱、未初始化数据泄露、以及跨 FFI 或线程边界的未定义行为等），为后续的自动化检测与漏洞挖掘提供了统一的分类基础。
+（1）针对异常控制流相关讨论难以刻画 panic 触发的状态演化、分类表述难与工具评测对齐等局限，本文提出根因驱动的场景分类与解释方法：以状态碎片化理论与三阶段演进模型突出 panic 的关键节点角色，按触发位置、资源状态与隔离边界划分 S1–S4，贯通各场景机理、后果及与传统漏洞标签的映射，为风险分析与后续评测提供统一语义锚点。
 
-二是构建基于场景分类的静态分析工具评测框架及配套基准数据集。在场景化分类体系的指导下，本文设计并实现了一套专用于评估 Rust 异常控制流安全性的综合评测平台。该框架由基准数据集与评测运行管线两部分构成：在基准层面，从开源漏洞库（如 CVE、RustSec）及顶会论文报告中提取并重构测试用例，收集并构造了涵盖多类真实漏洞及合成边界案例的 Benchmark 集合，并对编译器版本与 panic 策略进行显式锁定以阻断版本漂移干扰；在评测层面，建立标准化的运行管线与结果归一化流程，设计涵盖检出率、精确率、可运行率及场景感知指标等的指标体系，并引入能力边界归因方法，从控制流建模深度（如对 MIR 中 Unwind 分支的追踪）、数据流精度、跨域语义与工程依赖等维度解释各工具在不同场景下的表现差异。该框架具备较好的可复现性与可扩展性，为在异常控制流场景下系统评估现有静态分析工具的能力边界提供了支撑。
-
-三是系统评估主流 Rust 静态分析工具在异常控制流场景下的能力边界。依托上述自主构建的评测框架，本文选取 Rudra、MirChecker、FFIChecker 等具有代表性的前沿静态分析工具，系统性地将其应用于测试基准与真实开源项目之中。通过对比各工具在检出率、误报率及跨场景适用范围等指标上的表现，定量与定性地刻画现有检测技术的能力边界。针对评估中暴露的漏报与盲区（例如 FFI 异常漏检或规则集缺失），本文分析其成因，并据此为 Rust 社区未来开发跨层混合分析引擎（如动静结合的检测机制）提供参考。
-
-概而言之，本文的整体目标是填补 Rust 语言 Panic 安全性研究的系统性空白。围绕上述核心研究内容，本文凝练出以下两项主要创新点：
-
-（1）提出面向异常控制流的 Rust 漏洞场景化分类与建模体系。本研究在现有对“Panic 安全”的定性讨论基础上，将其形式化为系统化的分类框架。通过引入触发点、资源状态与隔离边界三个维度，将异常崩溃相关的问题归纳为四类典型安全场景。该工作丰富了系统级编程语言内存安全漏洞的刻画维度，对 Rust 线性类型安全模型在异常控制流下的拓展进行了梳理，通过机制分析与类型映射，实现了对 Panic 漏洞机理的较清晰刻画。
-
-（2）设计并实现基于分类体系的静态分析能力边界综合评估框架。传统漏洞扫描工具往往局限于特定代码模式，本文将安全场景分类与工具效能评估相结合，构建了具有较好通用性与分类覆盖度的评测框架。该框架支持按场景刻画现有 Rust 安全分析技术在异常控制流下的能力与盲区，并通过对编译器版本依赖的解耦，提供可随 Rust 演进而更新的评估基准，为工业界选型安全工具与学术界探索漏洞挖掘方向提供参考。
+（2）针对 panic 命题下基准固化困难、工具输出异构、指标缺乏场景感知、复现成本偏高等评测瓶颈，本文构建基于场景分类的静态分析评测框架：双轨基准构建与构建语义锁定，配合归一化管线与真值判定；在常规度量外引入场景感知指标与多维度能力归因，在场景语境下揭示工具能力分化与结构性短板，并沉淀可复用的评测组织方式，以支撑多工具组合与工程上的可用性—安全性权衡。
 
 ## 1.4 章节结构与安排
 
-本文余下章节结构如下。第 2 章介绍相关概念和技术基础，包括 Rust 内存安全模型与资源管理（所有权、借用、生命周期、RAII 与 Drop、unsafe 语义）、Rust panic 机制与非正常控制流、panic 安全性语义体系、静态分析技术基础（MIR 等）以及评测对象（Rudra、MirChecker、FFIChecker）的选取与范围界定。第 3 章提出 Rust 非正常控制流内存安全问题的场景分类与机制分析（本文创新点之一），从触发点、资源状态、边界位置三个维度构建分类框架，将问题归纳为四类典型场景（S1：Drop 执行中途 panic；S2：未初始化/部分初始化时 panic；S3：panic 跨 FFI 边界；S4：自定义资源清理逻辑中 panic），并逐一分析各场景的触发机制、内在原理及典型后果。第 4 章在此基础上构建基于场景分类的静态分析工具评测框架（本文创新点之二），界定评测目标与研究问题，阐述基准数据集构建策略、评测流程与结果归一化方法，设计涵盖基础指标、场景感知指标与成本指标的指标体系，提出能力边界分析方法，并开展实验与结果分析，在非正常控制流相关用例上对三款工具进行系统评测，给出总体对比结果、分场景表现及跨场景能力边界总结。第 5 章总结全文工作，归纳主要贡献与结论，分析研究的局限性，并对未来工作方向进行展望。通过上述章节的展开，本文全面呈现 Rust 非正常控制流下内存安全研究从背景铺垫、场景分类、评测框架到实证评估的完整研究链条。
+全文共分五章，章节结构如图 1.1 所示（图待绘制），详细安排如下。
+
+第 1 章 绪论。 首先，介绍 Rust 在 异常控制流下的内存风险，说明围绕该类命题开展机理与风险边界分析、静态工具能力评估及相关安全实践研究的背景与意义。其次，梳理并分析国内外相关研究现状：从静态分析、动态检测与消毒、模糊测试、形式化验证及跨语言边界防护等角度对相关方法进行归类与对照，并特别关注与 MIR/unwind 语义、工具评测及能力边界相关的进展。然后，归纳现有研究在异常控制流场景分类、可复现场景化评测范式、静态工具在隐式清理与跨边界语义上的适用边界等方面仍存在的不足。最后，阐述本文的两项核心研究内容与对应创新点，并给出全书的章节结构安排。
+
+第 2 章 相关概念和技术基础。 阐述 Rust 内存安全模型与资源管理（所有权、借用、生命周期、RAII 与 `Drop`、`unsafe` 与编译器保证边界）；说明 `panic` 的触发来源、unwind 与 abort 策略及其对分析与复现的影响；介绍 panic 安全性（panic safety）相关语义及标准库中的防护性机制（如毒化、`UnwindSafe` 等）；最后从 MIR 与显式清理路径出发简述静态分析评测的常见维度，并界定本文选取 Rudra、MirChecker、FFIChecker 作为评测对象的理由与范围。
+
+第 3 章 基于异常控制流的内存安全场景分类（创新点一）。 在从“症状驱动”到“根因驱动”的问题表述下，给出异常控制流与内存破坏的威胁模型；提出状态碎片化理论与三阶段威胁演进模型；设计由触发位置、资源状态与隔离边界构成的多维分类空间，并定义 S1–S4 场景、分析其机理及与传统漏洞标签的映射关系；基于与第 4 章共享的 100 例数据集给出分类有效性与分工具召回的实证推演，归纳对后续工具设计与评测具有指导意义的三类启发式洞见，并说明与第 4 章的衔接方式。
+
+第 4 章 基于场景分类的静态分析评测框架（创新点二）。 在引言中明确评测目标、研究问题与核心假设；系统阐述基准构建策略、自动化评测管线与结果归一化方法；给出基础指标、场景感知指标与边界归因方法；报告实验环境、100 例数据集中 S1–S4 的分布及三款工具的总体与分场景结果，结合 unwind/Drop 隐式路径、跨语言建模与状态机语义等维度解释方法反差；讨论有效性威胁与缓解措施，并对本章工作进行小结。
+
+第 5 章 总结与展望。 归纳本文在场景分类、评测框架与工具能力边界方面的主要结论；客观分析样例规模与分布、真实漏洞复现难度及静态分析范式等局限；从扩大基准、引入动态/符号方法、增强 unwind 与 FFI 联合建模及工具链集成等方向展望未来工作。
