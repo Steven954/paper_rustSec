@@ -37,7 +37,7 @@ Research on Memory Safety Issues in Rust Under Abnormal Control Flow
 - 第 1 章：背景与意义 → 国内外现状（多小节）→ 研究内容与创新点 → 章节安排
 - 第 2–5 章：另见下文各章纲要
 
-## 2 相关概念和技术基础（`chapter2_background.md`）
+## 2 相关概念及技术基础（`chapter2_background.md`）
 ### 2.1 Rust 内存安全模型与资源管理
 - 所有权、借用与生命周期；RAII 与 `Drop`；unsafe 与编译器责任边界
 
