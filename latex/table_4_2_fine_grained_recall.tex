@@ -1,0 +1,39 @@
+% ---------------------------------------------------------------------------
+% 表 4-2：各静态分析工具基于 S1--S4 独立场景的细粒度召回率分布
+%
+% 导言区请先加入：
+%   \usepackage{booktabs}
+%   \usepackage{multirow}
+% （若主文为中文，请已配置 ctex / xeCJK 等中文支持。）
+%
+% 正文中引用：见表~\ref{tab:fine-grained-recall-s1-s4}。
+% ---------------------------------------------------------------------------
+
+\begin{table}[htbp]
+  \centering
+  \caption{各静态分析工具基于 S1--S4 独立场景的细粒度召回率分布}
+  \label{tab:fine-grained-recall-s1-s4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{@{}l c *{6}{r}@{}}
+    \toprule
+    \multirow{2}{*}{异常演进场景}
+    & \multirow{2}{*}{测试用例数}
+    & \multicolumn{2}{c}{Rudra}
+    & \multicolumn{2}{c}{MirChecker}
+    & \multicolumn{2}{c}{FFIChecker} \\
+    \cmidrule(lr){3-4}
+    \cmidrule(lr){5-6}
+    \cmidrule(lr){7-8}
+    & & 检出 (TP) & 召回率 & 检出 (TP) & 召回率 & 检出 (TP) & 召回率 \\
+    \midrule
+    S1（析构异常重入）     &  4 &  3 & 0.7500 &  1 & 0.2500 &  0 & 0.0000 \\
+    S2（局部初始化逃逸）   & 66 & 34 & 0.5151 & 13 & 0.1970 &  0 & 0.0000 \\
+    S3（跨越语言边界）     & 16 &  2 & 0.1250 &  $0^{*}$ & 0.0000 & 11 & 0.6875 \\
+    S4（并发状态孤儿化）   & 14 &  8 & 0.5714 &  0 & 0.0000 &  0 & 0.0000 \\
+    \bottomrule
+  \end{tabular}
+
+  \begin{minipage}{0.95\linewidth}\footnotesize\setlength{\parskip}{0.25em}
+    $^{*}$~MirChecker 在 S3 场景的 16 个用例中，仅成功执行 15 例，产生 1 例崩溃，该局部场景可执行率为 0.9375。
+  \end{minipage}
+\end{table}

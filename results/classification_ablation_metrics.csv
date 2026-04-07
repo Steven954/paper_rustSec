@@ -1,0 +1,5 @@
+model,accuracy,macro_f1,recall_S1,recall_S2,recall_S3,recall_S4,data_source,method_note
+step1_only,0.810000,0.460479,0.000000,1.000000,0.937500,0.000000,"testcases/testcase_categories.csv","仅使用 ABI/跨语言节点（其余默认 S2）"
+step1_step2,0.730000,0.519309,0.000000,0.803030,0.937500,0.357143,"testcases/testcase_categories.csv","使用 ABI+并发节点，缺失析构阶段节点"
+step1_step3,0.840000,0.666073,1.000000,0.984848,0.937500,0.000000,"testcases/testcase_categories.csv","使用 ABI+析构阶段节点，缺失并发节点"
+full,0.760000,0.724785,1.000000,0.787879,0.937500,0.357143,"testcases/testcase_categories.csv","使用 ABI+并发+析构阶段三节点"

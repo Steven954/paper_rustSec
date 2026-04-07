@@ -1,0 +1,301 @@
+case_id,scenario,tool,run_status,detected,alert_count,alerts_json,duration_sec
+examples__c-in-rust-doublefree,S2,rudra,success,False,0,[],3.069914
+examples__c-in-rust-doublefree,S2,mirchecker,success,False,0,[],4.021802
+examples__c-in-rust-doublefree,S2,ffichecker,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""c_func: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func"", ""rule_id"": ""Use After Free, Double Free, Taint source meets taint sink""}]",11.442100
+examples__c-in-rust-memleak,S3,rudra,success,False,0,[],2.673346
+examples__c-in-rust-memleak,S3,mirchecker,success,False,0,[],3.906371
+examples__c-in-rust-memleak,S3,ffichecker,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""c_in_rust_memleak::main: LLVM IR of C code is known. Possible bugs: Memory Leakage, After FFI c_function finishes, argument %_4 is still in state `Forgotten`, seriousness: Medium, function: c_in_rust_memleak::main"", ""rule_id"": ""Memory Leakage, After FFI c_function finishes, argument %_4 is still in state `Forgotten`""}]",10.467721
+examples__c-in-rust-uaf,S2,rudra,success,False,0,[],2.711166
+examples__c-in-rust-uaf,S2,mirchecker,success,False,0,[],3.992851
+examples__c-in-rust-uaf,S2,ffichecker,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""c_func: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func"", ""rule_id"": ""Use After Free, Double Free, Taint source meets taint sink""}]",9.709348
+examples__cstring-test,S2,rudra,success,False,0,[],2.527821
+examples__cstring-test,S2,mirchecker,success,False,0,[],3.657209
+examples__cstring-test,S2,ffichecker,success,True,2,"[{""file"": """", ""line"": 0, ""message"": ""cstring_test::main: LLVM IR of C code is known. Possible bugs: Memory Leakage, After FFI c_func finishes, argument %p is still in state `Forgotten`, seriousness: Medium, function: cstring_test::main"", ""rule_id"": ""Memory Leakage, After FFI c_func finishes, argument %p is still in state `Forgotten`""}, {""file"": """", ""line"": 0, ""message"": ""c_func: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func"", ""rule_id"": ""Use After Free, Double Free, Taint source meets taint sink""}]",9.452069
+examples__ffi-simplest,S2,rudra,success,False,0,[],2.261573
+examples__ffi-simplest,S2,mirchecker,success,False,0,[],4.398745
+examples__ffi-simplest,S2,ffichecker,success,False,0,[],3.734749
+examples__function-pointer-test,S2,rudra,success,False,0,[],5.809688
+examples__function-pointer-test,S2,mirchecker,success,False,0,[],3.763839
+examples__function-pointer-test,S2,ffichecker,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""function_pointer_test::run_callback: LLVM IR of C code is unknown. Possible bugs: Use After Free, Call by function pointer, argument is `Tainted`., seriousness: Low, function: function_pointer_test::run_callback"", ""rule_id"": ""Use After Free, Call by function pointer, argument is `Tainted`""}]",9.511167
+examples__mix-box-free,S4,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: unused imports: `c_void`, `free`"", ""rule_id"": null}]",12.358841
+examples__mix-box-free,S4,mirchecker,success,False,0,[],3.884116
+examples__mix-box-free,S4,ffichecker,success,False,0,[],6.416040
+examples__mix-mem-allocator,S3,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: variable does not need to be mutable"", ""rule_id"": null}]",80.682478
+examples__mix-mem-allocator,S3,mirchecker,success,False,0,[],4.590023
+examples__mix-mem-allocator,S3,ffichecker,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""mix_mem_allocator::main: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: mix_mem_allocator::main"", ""rule_id"": ""Use After Free, Double Free, Taint source meets taint sink""}]",61.036119
+examples__rc-test,S2,rudra,success,False,0,[],7.008572
+examples__rc-test,S2,mirchecker,success,False,0,[],4.021383
+examples__rc-test,S2,ffichecker,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""c_func: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func"", ""rule_id"": ""Use After Free, Double Free, Taint source meets taint sink""}]",10.364254
+examples__return-value-test,S2,rudra,success,False,0,[],6.330569
+examples__return-value-test,S2,mirchecker,success,False,0,[],4.122927
+examples__return-value-test,S2,ffichecker,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""c_func: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func"", ""rule_id"": ""Use After Free, Double Free, Taint source meets taint sink""}]",9.756562
+examples__rust-in-c-uaf,S2,rudra,success,False,0,[],71.444210
+examples__rust-in-c-uaf,S2,mirchecker,error,False,0,[],0.628169
+examples__rust-in-c-uaf,S2,ffichecker,success,False,0,[],6.288206
+examples__rust-uaf-df,S2,rudra,success,False,0,[],2.682887
+examples__rust-uaf-df,S2,mirchecker,success,False,0,[],4.590358
+examples__rust-uaf-df,S2,ffichecker,success,False,0,[],76.984997
+examples__side-effects-test,S2,rudra,success,False,0,[],7.059511
+examples__side-effects-test,S2,mirchecker,success,False,0,[],4.886889
+examples__side-effects-test,S2,ffichecker,success,True,2,"[{""file"": """", ""line"": 0, ""message"": ""side_effects_test::main: LLVM IR of C code is known. Possible bugs: Memory Leakage, After FFI c_func finishes, argument %_8 is still in state `Forgotten`, seriousness: Medium, function: side_effects_test::main"", ""rule_id"": ""Memory Leakage, After FFI c_func finishes, argument %_8 is still in state `Forgotten`""}, {""file"": """", ""line"": 0, ""message"": ""c_func: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func"", ""rule_id"": ""Use After Free, Double Free, Taint source meets taint sink""}]",31.339283
+examples__string-test,S2,rudra,success,False,0,[],7.391451
+examples__string-test,S2,mirchecker,success,False,0,[],4.802990
+examples__string-test,S2,ffichecker,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""c_func: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func"", ""rule_id"": ""Use After Free, Double Free, Taint source meets taint sink""}]",10.268417
+examples__vec-test,S2,rudra,success,False,0,[],6.374589
+examples__vec-test,S2,mirchecker,success,False,0,[],4.327316
+examples__vec-test,S2,ffichecker,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""c_func: LLVM IR of C code is known. Possible bugs: Use After Free, Double Free, Taint source meets taint sink., seriousness: High, function: c_func"", ""rule_id"": ""Use After Free, Double Free, Taint source meets taint sink""}]",10.192043
+tests__safe-bugs__division-by-zero,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `division-by-zero v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__safe-bugs__division-by-zero)`"", ""rule_id"": null}]",1.436017
+tests__safe-bugs__division-by-zero,S1,mirchecker,success,True,1,"[{""file"": ""src/main.rs"", ""line"": 11, ""message"": ""warning: [MirChecker] Provably error: \""attempt to divide `\\\""_7\\\""` by zero\"""", ""rule_id"": null}]",5.215264
+tests__safe-bugs__division-by-zero,S1,ffichecker,success,False,0,[],3.436217
+tests__safe-bugs__incorrect-boundary-check,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: unused variable: `max_index`"", ""rule_id"": null}]",2.456377
+tests__safe-bugs__incorrect-boundary-check,S1,mirchecker,success,True,1,"[{""file"": ""src/main.rs"", ""line"": 9, ""message"": ""warning: [MirChecker] Provably error: index out of bound"", ""rule_id"": null}]",4.685562
+tests__safe-bugs__incorrect-boundary-check,S1,ffichecker,success,False,0,[],4.115817
+tests__safe-bugs__incorrect-cast,S1,rudra,success,False,0,[],2.365116
+tests__safe-bugs__incorrect-cast,S1,mirchecker,success,True,1,"[{""file"": ""src/main.rs"", ""line"": 6, ""message"": ""warning: [MirChecker] Provably error: \""attempt to compute `\\\""move _2\\\"" * \\\""const 1000000_u32\\\""`, which would overflow\"""", ""rule_id"": null}]",4.703535
+tests__safe-bugs__incorrect-cast,S1,ffichecker,success,False,0,[],4.486353
+tests__safe-bugs__integer-overflow,S1,rudra,success,False,0,[],3.052221
+tests__safe-bugs__integer-overflow,S1,mirchecker,success,True,4,"[{""file"": ""src/main.rs"", ""line"": 8, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""t\\\"" + \\\""const 1_i32\\\""`, which would overflow\"""", ""rule_id"": null}, {""file"": ""src/main.rs"", ""line"": 14, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""move _6\\\"" - \\\""move _7\\\""`, which would overflow\"""", ""rule_id"": null}, {""file"": ""src/main.rs"", ""line"": 18, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""move _11\\\"" + \\\""move _12\\\""`, which would overflow\"""", ""rule_id"": null}, {""file"": ""src/main.rs"", ""line"": 21, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""move _15\\\"" - \\\""move _16\\\""`, which would overflow\"""", ""rule_id"": null}]",4.709343
+tests__safe-bugs__integer-overflow,S1,ffichecker,success,False,0,[],4.042954
+tests__safe-bugs__out-of-bound-index,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: unused variable: `result`"", ""rule_id"": null}]",2.775841
+tests__safe-bugs__out-of-bound-index,S1,mirchecker,success,True,3,"[{""file"": ""src/main.rs"", ""line"": 5, ""message"": ""warning: [MirChecker] Possible error: index out of bound"", ""rule_id"": null}, {""file"": ""src/main.rs"", ""line"": 6, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""move _12\\\"" + \\\""const 1_usize\\\""`, which would overflow\"""", ""rule_id"": null}, {""file"": ""src/main.rs"", ""line"": 8, ""message"": ""warning: [MirChecker] Possible error: index out of bound"", ""rule_id"": null}]",4.550669
+tests__safe-bugs__out-of-bound-index,S1,ffichecker,success,False,0,[],4.345571
+tests__safe-bugs__unreachable,S1,rudra,success,False,0,[],2.343908
+tests__safe-bugs__unreachable,S1,mirchecker,success,True,1,"[{""file"": ""src/main.rs"", ""line"": 7, ""message"": ""warning: [MirChecker] Possible error: run into panic code"", ""rule_id"": null}]",4.757509
+tests__safe-bugs__unreachable,S1,ffichecker,success,False,0,[],4.051689
+tests__unit-tests__alloc-test,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `alloc-test v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__alloc-test)`"", ""rule_id"": null}]",1.488837
+tests__unit-tests__alloc-test,S1,mirchecker,success,False,0,[],4.697510
+tests__unit-tests__alloc-test,S1,ffichecker,success,False,0,[],3.339338
+tests__unit-tests__annotation,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `annotation v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__annotation)`"", ""rule_id"": null}]",1.498718
+tests__unit-tests__annotation,S1,mirchecker,success,False,0,[],4.725163
+tests__unit-tests__annotation,S1,ffichecker,success,False,0,[],2.882064
+tests__unit-tests__arith,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `arith v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__arith)`"", ""rule_id"": null}]",1.549119
+tests__unit-tests__arith,S1,mirchecker,success,False,0,[],4.687454
+tests__unit-tests__arith,S1,ffichecker,success,False,0,[],3.009889
+tests__unit-tests__array,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `array v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__array)`"", ""rule_id"": null}]",1.489380
+tests__unit-tests__array,S1,mirchecker,success,False,0,[],5.113294
+tests__unit-tests__array,S1,ffichecker,success,False,0,[],3.067486
+tests__unit-tests__assignment,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `assignment v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__assignment)`"", ""rule_id"": null}]",1.392499
+tests__unit-tests__assignment,S1,mirchecker,success,False,0,[],4.730217
+tests__unit-tests__assignment,S1,ffichecker,success,False,0,[],3.077498
+tests__unit-tests__big-loop,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `big-loop v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__big-loop)`"", ""rule_id"": null}]",1.404852
+tests__unit-tests__big-loop,S1,mirchecker,success,True,2,"[{""file"": ""src/main.rs"", ""line"": 8, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""i\\\"" + \\\""const 1_i32\\\""`, which would overflow\"""", ""rule_id"": null}, {""file"": ""src/main.rs"", ""line"": 15, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""_11\\\"" - \\\""const 1_i32\\\""`, which would overflow\"""", ""rule_id"": null}]",4.814899
+tests__unit-tests__big-loop,S1,ffichecker,success,False,0,[],3.051637
+tests__unit-tests__cast,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `cast v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__cast)`"", ""rule_id"": null}]",1.761669
+tests__unit-tests__cast,S1,mirchecker,success,False,0,[],4.734063
+tests__unit-tests__cast,S1,ffichecker,success,False,0,[],2.938313
+tests__unit-tests__crate-bin-test,S1,rudra,success,False,0,[],2.493965
+tests__unit-tests__crate-bin-test,S1,mirchecker,success,False,0,[],4.411909
+tests__unit-tests__crate-bin-test,S1,ffichecker,success,False,0,[],3.824853
+tests__unit-tests__crate-lib-test,S1,rudra,success,False,0,[],3.142639
+tests__unit-tests__crate-lib-test,S1,mirchecker,success,False,0,[],4.396843
+tests__unit-tests__crate-lib-test,S1,ffichecker,success,False,0,[],3.404883
+tests__unit-tests__empty,S1,rudra,success,False,0,[],2.671509
+tests__unit-tests__empty,S1,mirchecker,success,False,0,[],6.168854
+tests__unit-tests__empty,S1,ffichecker,success,False,0,[],4.585323
+tests__unit-tests__enum-test,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `enum-test v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__enum-test)`"", ""rule_id"": null}]",1.385186
+tests__unit-tests__enum-test,S1,mirchecker,success,False,0,[],4.854902
+tests__unit-tests__enum-test,S1,ffichecker,success,False,0,[],2.665932
+tests__unit-tests__function-call,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `function-call v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__function-call)`"", ""rule_id"": null}]",1.372179
+tests__unit-tests__function-call,S1,mirchecker,success,False,0,[],4.148057
+tests__unit-tests__function-call,S1,ffichecker,success,False,0,[],2.749765
+tests__unit-tests__index,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `index v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__index)`"", ""rule_id"": null}]",1.358188
+tests__unit-tests__index,S1,mirchecker,success,False,0,[],4.139788
+tests__unit-tests__index,S1,ffichecker,success,False,0,[],2.771393
+tests__unit-tests__input-type,S1,rudra,success,False,0,[],2.930394
+tests__unit-tests__input-type,S1,mirchecker,success,False,0,[],4.071433
+tests__unit-tests__input-type,S1,ffichecker,success,False,0,[],3.519906
+tests__unit-tests__iterator,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `iterator v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__iterator)`"", ""rule_id"": null}]",1.325505
+tests__unit-tests__iterator,S1,mirchecker,success,False,0,[],4.111986
+tests__unit-tests__iterator,S1,ffichecker,success,False,0,[],2.912570
+tests__unit-tests__loop-test,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `loop-test v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__loop-test)`"", ""rule_id"": null}]",1.350865
+tests__unit-tests__loop-test,S1,mirchecker,success,True,1,"[{""file"": ""src/main.rs"", ""line"": 24, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""(*_2)\\\"" + \\\""const 1_i32\\\""`, which would overflow\"""", ""rule_id"": null}]",4.374835
+tests__unit-tests__loop-test,S1,ffichecker,success,False,0,[],2.655331
+tests__unit-tests__method-test,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: struct is never constructed: `A`"", ""rule_id"": null}]",2.258885
+tests__unit-tests__method-test,S1,mirchecker,success,False,0,[],4.112550
+tests__unit-tests__method-test,S1,ffichecker,success,False,0,[],4.325969
+tests__unit-tests__negation,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `negation v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__negation)`"", ""rule_id"": null}]",1.420295
+tests__unit-tests__negation,S1,mirchecker,success,False,0,[],4.562884
+tests__unit-tests__negation,S1,ffichecker,success,False,0,[],2.795317
+tests__unit-tests__recursion,S3,rudra,success,False,0,[],2.539465
+tests__unit-tests__recursion,S3,mirchecker,success,True,1,"[{""file"": ""src/main.rs"", ""line"": 13, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""move _3\\\"" * \\\""move _4\\\""`, which would overflow\"""", ""rule_id"": null}]",4.615110
+tests__unit-tests__recursion,S3,ffichecker,success,False,0,[],3.731115
+tests__unit-tests__size-of,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `size-of v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__size-of)`"", ""rule_id"": null}]",1.401291
+tests__unit-tests__size-of,S1,mirchecker,success,False,0,[],5.028312
+tests__unit-tests__size-of,S1,ffichecker,success,False,0,[],2.826495
+tests__unit-tests__struct-test,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `struct-test v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__struct-test)`"", ""rule_id"": null}]",1.609448
+tests__unit-tests__struct-test,S1,mirchecker,success,False,0,[],4.529342
+tests__unit-tests__struct-test,S1,ffichecker,success,False,0,[],2.888576
+tests__unit-tests__vector,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `vector v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__vector)`"", ""rule_id"": null}]",1.465883
+tests__unit-tests__vector,S1,mirchecker,success,False,0,[],4.653554
+tests__unit-tests__vector,S1,ffichecker,success,False,0,[],3.158952
+tests__unit-tests__widen-narrow,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `macros` as a dependency of package `widen-narrow v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/tests__unit-tests__widen-narrow)`"", ""rule_id"": null}]",1.452033
+tests__unit-tests__widen-narrow,S1,mirchecker,success,True,2,"[{""file"": ""src/main.rs"", ""line"": 13, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""move _6\\\"" + \\\""const 1_i32\\\""`, which would overflow\"""", ""rule_id"": null}, {""file"": ""src/main.rs"", ""line"": 16, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""move _8\\\"" + \\\""const 1_i32\\\""`, which would overflow\"""", ""rule_id"": null}]",4.828445
+tests__unit-tests__widen-narrow,S1,ffichecker,success,False,0,[],3.092415
+tests__unsafe-bugs__double-free,S2,rudra,success,False,0,[],2.440951
+tests__unsafe-bugs__double-free,S2,mirchecker,success,True,1,"[{""file"": ""src/main.rs"", ""line"": 22, ""message"": ""warning: [MirChecker] Possible error n visit return: double-free or use-after-free"", ""rule_id"": null}]",5.108716
+tests__unsafe-bugs__double-free,S2,ffichecker,success,False,0,[],4.100027
+tests__unsafe-bugs__gmath,S2,rudra,success,False,0,[],3.010634
+tests__unsafe-bugs__gmath,S2,mirchecker,success,False,0,[],4.367811
+tests__unsafe-bugs__gmath,S2,ffichecker,success,False,0,[],3.449343
+tests__unsafe-bugs__offset,S1,rudra,success,False,0,[],2.371771
+tests__unsafe-bugs__offset,S1,mirchecker,success,False,0,[],4.443673
+tests__unsafe-bugs__offset,S1,ffichecker,success,False,0,[],3.718706
+tests__unsafe-bugs__spglib-rs,S2,rudra,success,False,0,[],3.156893
+tests__unsafe-bugs__spglib-rs,S2,mirchecker,success,False,0,[],4.436128
+tests__unsafe-bugs__spglib-rs,S2,ffichecker,success,False,0,[],3.680854
+tests__unsafe-bugs__use-after-free(CVE-2019-15551),S2,rudra,success,False,0,[],2.289312
+tests__unsafe-bugs__use-after-free(CVE-2019-15551),S2,mirchecker,success,False,0,[],4.179800
+tests__unsafe-bugs__use-after-free(CVE-2019-15551),S2,ffichecker,success,False,0,[],3.912526
+tests__unsafe-bugs__use-after-free(CVE-2019-16140),S2,rudra,success,False,0,[],2.323502
+tests__unsafe-bugs__use-after-free(CVE-2019-16140),S2,mirchecker,success,False,0,[],4.198346
+tests__unsafe-bugs__use-after-free(CVE-2019-16140),S2,ffichecker,success,False,0,[],3.889725
+trophy-case__bitvec-test,S1,rudra,success,False,0,[],9.462980
+trophy-case__bitvec-test,S1,mirchecker,success,True,3,"[{""file"": ""/workspace/.cargo-home/registry/src/mirrors.ustc.edu.cn-12df342d903acd47/bitvec-0.20.1/src/mem.rs"", ""line"": 117, ""message"": ""warning: [MirChecker] Provably error: \""attempt to divide `\\\""_6\\\""` by zero\"""", ""rule_id"": null}, {""file"": ""/workspace/.cargo-home/registry/src/mirrors.ustc.edu.cn-12df342d903acd47/bitvec-0.20.1/src/mem.rs"", ""line"": 117, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""move _5\\\"" + \\\""move _9\\\""`, which would overflow\"""", ""rule_id"": null}, {""file"": ""/workspace/.cargo-home/registry/src/mirrors.ustc.edu.cn-12df342d903acd47/bitvec-0.20.1/src/mem.rs"", ""line"": 117, ""message"": ""warning: [MirChecker] Provably error: \""attempt to calculate the remainder of `\\\""_12\\\""` with a divisor of zero\"""", ""rule_id"": null}]",10.536759
+trophy-case__bitvec-test,S1,ffichecker,success,False,0,[],8.327605
+trophy-case__brotli-test,S1,rudra,success,False,0,[],12.608034
+trophy-case__brotli-test,S1,mirchecker,success,False,0,[],13.020412
+trophy-case__brotli-test,S1,ffichecker,success,False,0,[],17.798728
+trophy-case__brotli-test2,S1,rudra,success,False,0,[],8.587780
+trophy-case__brotli-test2,S1,mirchecker,success,False,0,[],9.785101
+trophy-case__brotli-test2,S1,ffichecker,success,False,0,[],16.753619
+trophy-case__brotli-test3,S1,rudra,success,False,0,[],8.512018
+trophy-case__brotli-test3,S1,mirchecker,success,False,0,[],9.309910
+trophy-case__brotli-test3,S1,ffichecker,success,False,0,[],20.073335
+trophy-case__bytemuck-test,S1,rudra,success,False,0,[],4.466963
+trophy-case__bytemuck-test,S1,mirchecker,success,False,0,[],6.072555
+trophy-case__bytemuck-test,S1,ffichecker,success,False,0,[],5.012499
+trophy-case__byte-unit-test,S1,rudra,success,False,0,[],4.820025
+trophy-case__byte-unit-test,S1,mirchecker,success,True,1,"[{""file"": ""/workspace/.cargo-home/registry/src/mirrors.ustc.edu.cn-12df342d903acd47/byte-unit-4.0.9/src/u128/constants.rs"", ""line"": 105, ""message"": ""warning: [MirChecker] Possible error: \""attempt to compute `\\\""move _2\\\"" * \\\""const byte_unit::ZETTABYTE\\\""`, which would overflow\"""", ""rule_id"": null}]",6.275103
+trophy-case__byte-unit-test,S1,ffichecker,success,False,0,[],4.965036
+trophy-case__executable-memory-test,S4,rudra,success,False,0,[],12.635260
+trophy-case__executable-memory-test,S4,mirchecker,success,False,0,[],57.235862
+trophy-case__executable-memory-test,S4,ffichecker,success,False,0,[],8.367166
+trophy-case__executable-memory-test2,S4,rudra,success,False,0,[],12.461775
+trophy-case__executable-memory-test2,S4,mirchecker,success,True,1,"[{""file"": ""src/main.rs"", ""line"": 9, ""message"": ""warning: [MirChecker] Possible error: \""index out of bounds: the length is \\\""move _33\\\"" but the index is \\\""_32\\\""\"""", ""rule_id"": null}]",12.167461
+trophy-case__executable-memory-test2,S4,ffichecker,success,False,0,[],8.196075
+trophy-case__gmath-test,S2,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: unused import: `gmath::dealloc`"", ""rule_id"": null}]",2.912450
+trophy-case__gmath-test,S2,mirchecker,success,False,0,[],4.506014
+trophy-case__gmath-test,S2,ffichecker,success,False,0,[],4.109314
+trophy-case__qrcode-generator-test,S4,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: unused `std::result::Result` that must be used"", ""rule_id"": null}]",38.189262
+trophy-case__qrcode-generator-test,S4,mirchecker,success,False,0,[],73.992978
+trophy-case__qrcode-generator-test,S4,ffichecker,success,False,0,[],49.296136
+trophy-case__r1cs-test,S4,rudra,success,False,0,[],18.138833
+trophy-case__r1cs-test,S4,mirchecker,success,False,0,[],15.305644
+trophy-case__r1cs-test,S4,ffichecker,success,False,0,[],16.295357
+trophy-case__r1cs-test2,S4,rudra,success,False,0,[],12.550591
+trophy-case__r1cs-test2,S4,mirchecker,success,False,0,[],10.605306
+trophy-case__r1cs-test2,S4,ffichecker,success,False,0,[],15.224694
+trophy-case__runes-test,S1,rudra,success,False,0,[],29.635979
+trophy-case__runes-test,S1,mirchecker,success,False,0,[],6.237647
+trophy-case__runes-test,S1,ffichecker,success,False,0,[],5.149259
+trophy-case__runes-test2,S4,rudra,success,False,0,[],3.083571
+trophy-case__runes-test2,S4,mirchecker,success,False,0,[],4.874644
+trophy-case__runes-test2,S4,ffichecker,success,False,0,[],5.274090
+trophy-case__safe-transmute-test,S4,rudra,success,False,0,[],4.587645
+trophy-case__safe-transmute-test,S4,mirchecker,success,False,0,[],6.251300
+trophy-case__safe-transmute-test,S4,ffichecker,success,False,0,[],4.747720
+trophy-case__scriptful-test,S4,rudra,success,False,0,[],5.103251
+trophy-case__scriptful-test,S4,mirchecker,success,False,0,[],6.184770
+trophy-case__scriptful-test,S4,ffichecker,success,False,0,[],5.224965
+trophy-case__spglib-test,S2,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error during execution of `cargo metadata`: error: failed to get `spglib` as a dependency of package `spglib-test v0.1.0 (/tmp/rudra-repo/cases/_eval_runner/trophy-case__spglib-test)`"", ""rule_id"": null}]",1.396311
+trophy-case__spglib-test,S2,mirchecker,success,False,0,[],4.142963
+trophy-case__spglib-test,S2,ffichecker,success,False,0,[],2.810530
+cases__panic_double_free,S2,rudra,success,True,1,"[{""file"": ""src/main.rs"", ""line"": 4, ""message"": ""Potential unsafe dataflow issue in `bad`"", ""rule_id"": ""UnsafeDataflow:/ReadFlow""}]",2.677049
+cases__panic_double_free,S2,mirchecker,success,False,0,[],4.019110
+cases__panic_double_free,S2,ffichecker,success,False,0,[],3.669817
+cases__panic_safe_guard,S2,rudra,success,False,0,[],2.509055
+cases__panic_safe_guard,S2,mirchecker,success,False,0,[],3.831051
+cases__panic_safe_guard,S2,ffichecker,success,False,0,[],3.841621
+tests__panic_safety__insertion_sort.rs,S2,rudra,success,True,1,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__insertion_sort.rs"", ""line"": 10, ""message"": ""Potential unsafe dataflow issue in `insertion_sort_unsafe`"", ""rule_id"": ""UnsafeDataflow:/ReadFlow/CopyFlow/WriteFlow""}]",1.034215
+tests__panic_safety__insertion_sort.rs,S2,mirchecker,success,False,0,[],3.918714
+tests__panic_safety__insertion_sort.rs,S2,ffichecker,success,False,0,[],6.418325
+tests__panic_safety__order_safe.rs,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: function is never used: `test_order_safe`"", ""rule_id"": null}]",1.137060
+tests__panic_safety__order_safe.rs,S1,mirchecker,success,False,0,[],3.922213
+tests__panic_safety__order_safe.rs,S1,ffichecker,success,False,0,[],72.687139
+tests__panic_safety__order_safe_if.rs,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: function is never used: `test_order_safe_if`"", ""rule_id"": null}]",1.064469
+tests__panic_safety__order_safe_if.rs,S1,mirchecker,success,False,0,[],3.834800
+tests__panic_safety__order_safe_if.rs,S1,ffichecker,success,False,0,[],65.777393
+tests__panic_safety__order_safe_loop.rs,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: unused variable: `item`"", ""rule_id"": null}]",1.031213
+tests__panic_safety__order_safe_loop.rs,S1,mirchecker,success,False,0,[],3.833455
+tests__panic_safety__order_safe_loop.rs,S1,ffichecker,success,False,0,[],71.266355
+tests__panic_safety__order_unsafe.rs,S2,rudra,success,True,1,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__order_unsafe.rs"", ""line"": 10, ""message"": ""Potential unsafe dataflow issue in `test_order_unsafe`"", ""rule_id"": ""UnsafeDataflow:/ReadFlow""}]",1.089516
+tests__panic_safety__order_unsafe.rs,S2,mirchecker,success,False,0,[],4.014496
+tests__panic_safety__order_unsafe.rs,S2,ffichecker,success,False,0,[],67.477601
+tests__panic_safety__order_unsafe_loop.rs,S2,rudra,success,True,1,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__panic_safety__order_unsafe_loop.rs"", ""line"": 10, ""message"": ""Potential unsafe dataflow issue in `test_order_unsafe_loop`"", ""rule_id"": ""UnsafeDataflow:/ReadFlow""}]",1.035339
+tests__panic_safety__order_unsafe_loop.rs,S2,mirchecker,success,False,0,[],3.860270
+tests__panic_safety__order_unsafe_loop.rs,S2,ffichecker,success,False,0,[],69.734422
+tests__panic_safety__order_unsafe_transmute.rs,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: function is never used: `test_order_unsafe`"", ""rule_id"": null}]",1.039629
+tests__panic_safety__order_unsafe_transmute.rs,S1,mirchecker,success,False,0,[],3.743666
+tests__panic_safety__order_unsafe_transmute.rs,S1,ffichecker,success,False,0,[],67.634311
+tests__panic_safety__pointer_to_ref.rs,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: function is never used: `test_order_unsafe`"", ""rule_id"": null}]",1.035651
+tests__panic_safety__pointer_to_ref.rs,S1,mirchecker,success,False,0,[],3.802658
+tests__panic_safety__pointer_to_ref.rs,S1,ffichecker,success,False,0,[],67.909819
+tests__panic_safety__vec_push_all.rs,S2,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: associated function is never used: `push_all`"", ""rule_id"": null}]",1.058333
+tests__panic_safety__vec_push_all.rs,S2,mirchecker,success,False,0,[],3.849345
+tests__panic_safety__vec_push_all.rs,S2,ffichecker,success,False,0,[],67.908127
+tests__send_sync__no_generic.rs,S3,rudra,success,False,0,[],0.994324
+tests__send_sync__no_generic.rs,S3,mirchecker,success,False,0,[],3.675433
+tests__send_sync__no_generic.rs,S3,ffichecker,success,False,0,[],67.553941
+tests__send_sync__okay_channel.rs,S3,rudra,success,True,1,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__send_sync__okay_channel.rs"", ""line"": 13, ""message"": ""Suspicious impl of `Sync` found"", ""rule_id"": ""SendSyncVariance:/NaiveSyncForSync/RelaxSync""}]",1.034757
+tests__send_sync__okay_channel.rs,S3,mirchecker,success,False,0,[],3.643517
+tests__send_sync__okay_channel.rs,S3,ffichecker,success,False,0,[],66.114937
+tests__send_sync__okay_imm.rs,S3,rudra,success,False,0,[],0.977550
+tests__send_sync__okay_imm.rs,S3,mirchecker,success,False,0,[],3.863158
+tests__send_sync__okay_imm.rs,S3,ffichecker,success,False,0,[],66.035391
+tests__send_sync__okay_negative.rs,S3,rudra,success,False,0,[],1.050696
+tests__send_sync__okay_negative.rs,S3,mirchecker,success,False,0,[],3.787460
+tests__send_sync__okay_negative.rs,S3,ffichecker,success,False,0,[],68.648918
+tests__send_sync__okay_phantom.rs,S3,rudra,success,False,0,[],1.189353
+tests__send_sync__okay_phantom.rs,S3,mirchecker,success,False,0,[],4.317424
+tests__send_sync__okay_phantom.rs,S3,ffichecker,success,False,0,[],64.877728
+tests__send_sync__okay_ptr_like.rs,S3,rudra,success,False,0,[],1.039793
+tests__send_sync__okay_ptr_like.rs,S3,mirchecker,success,False,0,[],3.828581
+tests__send_sync__okay_ptr_like.rs,S3,ffichecker,success,False,0,[],66.622821
+tests__send_sync__okay_transitive.rs,S3,rudra,success,False,0,[],1.057681
+tests__send_sync__okay_transitive.rs,S3,mirchecker,success,False,0,[],3.823886
+tests__send_sync__okay_transitive.rs,S3,ffichecker,success,False,0,[],65.461319
+tests__send_sync__okay_where.rs,S3,rudra,success,False,0,[],1.025081
+tests__send_sync__okay_where.rs,S3,mirchecker,success,False,0,[],3.751997
+tests__send_sync__okay_where.rs,S3,ffichecker,success,False,0,[],68.584036
+tests__send_sync__sync_over_send_fp.rs,S3,rudra,success,False,0,[],1.115284
+tests__send_sync__sync_over_send_fp.rs,S3,mirchecker,success,False,0,[],3.956309
+tests__send_sync__sync_over_send_fp.rs,S3,ffichecker,success,False,0,[],67.147953
+tests__send_sync__wild_channel.rs,S3,rudra,success,True,1,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__send_sync__wild_channel.rs"", ""line"": 13, ""message"": ""Suspicious impl of `Sync` found"", ""rule_id"": ""SendSyncVariance:/ApiSyncforSync/NaiveSyncForSync""}]",1.088544
+tests__send_sync__wild_channel.rs,S3,mirchecker,success,False,0,[],4.029344
+tests__send_sync__wild_channel.rs,S3,ffichecker,success,False,0,[],68.282284
+tests__send_sync__wild_phantom.rs,S3,rudra,success,True,1,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__send_sync__wild_phantom.rs"", ""line"": 16, ""message"": ""Suspicious impl of `Sync` found"", ""rule_id"": ""SendSyncVariance:/NaiveSyncForSync/RelaxSync""}]",1.063536
+tests__send_sync__wild_phantom.rs,S3,mirchecker,success,False,0,[],4.022169
+tests__send_sync__wild_phantom.rs,S3,ffichecker,success,False,0,[],67.091947
+tests__send_sync__wild_send.rs,S3,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""Error (SendSyncVariance:/PhantomSendForSend/NaiveSendForSend/RelaxSend): Suspicious impl of `Send` found"", ""rule_id"": null}]",1.051181
+tests__send_sync__wild_send.rs,S3,mirchecker,success,False,0,[],3.693849
+tests__send_sync__wild_send.rs,S3,ffichecker,success,False,0,[],72.360291
+tests__send_sync__wild_sync.rs,S3,rudra,success,False,0,[],1.299305
+tests__send_sync__wild_sync.rs,S3,mirchecker,success,False,0,[],4.140654
+tests__send_sync__wild_sync.rs,S3,ffichecker,success,False,0,[],66.989880
+tests__unsafe_destructor__copy_filter.rs,S1,rudra,success,False,0,[],1.052981
+tests__unsafe_destructor__copy_filter.rs,S1,mirchecker,success,False,0,[],3.690785
+tests__unsafe_destructor__copy_filter.rs,S1,ffichecker,success,False,0,[],68.756665
+tests__unsafe_destructor__ffi.rs,S2,rudra,success,False,0,[],1.079577
+tests__unsafe_destructor__ffi.rs,S2,mirchecker,success,False,0,[],3.792077
+tests__unsafe_destructor__ffi.rs,S2,ffichecker,success,False,0,[],67.939173
+tests__unsafe_destructor__fp1.rs,S3,rudra,success,True,1,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__unsafe_destructor__fp1.rs"", ""line"": 14, ""message"": ""unsafe block detected in drop"", ""rule_id"": ""UnsafeDestructor""}]",1.054926
+tests__unsafe_destructor__fp1.rs,S3,mirchecker,success,False,0,[],5.468239
+tests__unsafe_destructor__fp1.rs,S3,ffichecker,success,False,0,[],75.810554
+tests__unsafe_destructor__normal1.rs,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: field is never read: `vec`"", ""rule_id"": null}]",1.050452
+tests__unsafe_destructor__normal1.rs,S1,mirchecker,success,False,0,[],3.826549
+tests__unsafe_destructor__normal1.rs,S1,ffichecker,success,False,0,[],67.166263
+tests__unsafe_destructor__normal2.rs,S2,rudra,success,True,1,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__unsafe_destructor__normal2.rs"", ""line"": 15, ""message"": ""unsafe block detected in drop"", ""rule_id"": ""UnsafeDestructor""}]",1.067310
+tests__unsafe_destructor__normal2.rs,S2,mirchecker,success,False,0,[],4.166311
+tests__unsafe_destructor__normal2.rs,S2,ffichecker,success,False,0,[],88.105012
+tests__utility__generic_param_ctxts.rs,S3,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: unused variable: `x`"", ""rule_id"": null}]",1.015274
+tests__utility__generic_param_ctxts.rs,S3,mirchecker,success,False,0,[],3.735128
+tests__utility__generic_param_ctxts.rs,S3,ffichecker,success,False,0,[],67.151649
+tests__utility__identify_generic_params.rs,S3,rudra,success,True,1,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__utility__identify_generic_params.rs"", ""line"": 9, ""message"": ""Suspicious impl of `Send` found"", ""rule_id"": ""SendSyncVariance:/PhantomSendForSend/NaiveSendForSend""}]",1.181040
+tests__utility__identify_generic_params.rs,S3,mirchecker,success,False,0,[],3.868655
+tests__utility__identify_generic_params.rs,S3,ffichecker,success,False,0,[],65.593339
+tests__utility__report_handle_macro.rs,S3,rudra,success,True,2,"[{""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__utility__report_handle_macro.rs"", ""line"": 26, ""message"": ""Suspicious impl of `Sync` found"", ""rule_id"": ""SendSyncVariance:/NaiveSyncForSync/RelaxSync""}, {""file"": ""/tmp/rudra-repo/tests/_eval_runner/tests__utility__report_handle_macro.rs"", ""line"": 27, ""message"": ""Suspicious impl of `Sync` found"", ""rule_id"": ""SendSyncVariance:/NaiveSyncForSync/RelaxSync""}]",1.091382
+tests__utility__report_handle_macro.rs,S3,mirchecker,success,False,0,[],3.777820
+tests__utility__report_handle_macro.rs,S3,ffichecker,success,False,0,[],67.291993
+tests__utility__rudra_paths_discovery.rs,S1,rudra,success,True,1,"[{""file"": """", ""line"": 0, ""message"": ""warning: use of deprecated function `std::intrinsics::drop_in_place`: no longer an intrinsic - use `ptr::drop_in_place` directly"", ""rule_id"": null}]",1.070753
+tests__utility__rudra_paths_discovery.rs,S1,mirchecker,success,False,0,[],3.760781
+tests__utility__rudra_paths_discovery.rs,S1,ffichecker,success,False,0,[],67.987089

@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-04-02T15:23:06.373792+00:00",
+  "generated_at_utc": "2026-04-02T15:23:06.357494+00:00",
   "normalized_path": "C:\\Users\\ASUS\\data\\毕业论文\\paper_rustSec\\eval\\results_reclassified_S1_S4\\normalized.csv",
   "total_cases": 100,
   "cases_by_scenario": {
@@ -139,7 +139,7 @@
     }
   },
   "outputs": {
-    "metrics_summary_json": "C:\\Users\\ASUS\\data\\毕业论文\\paper_rustSec\\eval\\results\\metrics_summary.json",
-    "metrics_by_scenario_csv": "C:\\Users\\ASUS\\data\\毕业论文\\paper_rustSec\\eval\\results\\metrics_by_scenario.csv"
+    "metrics_summary_json": "C:\\Users\\ASUS\\data\\毕业论文\\paper_rustSec\\eval\\results_reclassified_S1_S4\\metrics_summary.json",
+    "metrics_by_scenario_csv": "C:\\Users\\ASUS\\data\\毕业论文\\paper_rustSec\\eval\\results_reclassified_S1_S4\\metrics_by_scenario.csv"
   }
 }

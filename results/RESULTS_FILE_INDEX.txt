@@ -1,0 +1,198 @@
+results 目录文件说明（自动生成）
+
+说明：本索引按当前实际文件生成，记录内容与用途。
+
+- ablation_logs/examples__c-in-rust-uaf_abort.log | 3299 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/examples__c-in-rust-uaf_unwind.log | 3305 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/examples__mix-box-free_abort.log | 1383 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/examples__mix-box-free_unwind.log | 1387 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/examples__rc-test_abort.log | 3224 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/examples__rc-test_unwind.log | 3230 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/examples__string-test_abort.log | 3272 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/examples__string-test_unwind.log | 3278 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__safe-bugs__integer-overflow_abort.log | 1735 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__safe-bugs__integer-overflow_unwind.log | 1733 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__safe-bugs__out-of-bound-index_abort.log | 2519 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__safe-bugs__out-of-bound-index_unwind.log | 2519 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__array_abort.log | 1278 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__array_unwind.log | 1281 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__assignment_abort.log | 1308 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__assignment_unwind.log | 1311 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__big-loop_abort.log | 1296 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__big-loop_unwind.log | 1299 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__iterator_abort.log | 1296 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__iterator_unwind.log | 1299 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__recursion_abort.log | 835 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__recursion_unwind.log | 838 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__vector_abort.log | 1284 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__vector_unwind.log | 1287 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__widen-narrow_abort.log | 1320 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unit-tests__widen-narrow_unwind.log | 1323 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unsafe-bugs__double-free_abort.log | 931 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unsafe-bugs__double-free_unwind.log | 935 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unsafe-bugs__offset_abort.log | 828 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/tests__unsafe-bugs__offset_unwind.log | 831 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__brotli-test2_abort.log | 1956 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__brotli-test2_unwind.log | 1955 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__executable-memory-test_abort.log | 2261 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__executable-memory-test_unwind.log | 2259 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__gmath-test_abort.log | 1065 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__gmath-test_unwind.log | 1068 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__runes-test_abort.log | 1909 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__runes-test_unwind.log | 1906 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__spglib-test_abort.log | 1390 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_logs/trophy-case__spglib-test_unwind.log | 1393 bytes
+  内容：单个样例在某panic策略下的原始终端日志
+  作用：故障复核与附录证据
+
+- ablation_raw.csv | 26996 bytes
+  内容：20样例x2 panic策略的逐条运行记录（原始结构化）
+  作用：panic策略对照实验原始数据
+
+- ablation_run_metadata.json | 1068 bytes
+  内容：运行环境、平台、工具链、提交版本、总体计数元数据
+  作用：保证实验环境可复现
+
+- ablation_selection.json | 5851 bytes
+  内容：本轮抽样样例清单、配额与抽样顺序
+  作用：保证抽样可复现
+
+- ablation_summary.csv | 1608 bytes
+  内容：按overall/scenario/fault_type聚合的统计结果
+  作用：panic策略对照实验汇总数据
+
+- classification_ablation_metrics.csv | 694 bytes
+  内容：节点消融变体的accuracy/macro_f1/分场景recall汇总
+  作用：第三章消融结论表
+
+- classification_case_level_evidence.csv | 9310 bytes
+  内容：100个样例的case级证据位与各消融变体预测结果
+  作用：第三章分类方法实证主数据（case-level）
+
+- classification_confusion_full.csv | 1000 bytes
+  内容：full变体的4x4混淆矩阵展开
+  作用：第三章边界误差分析
+
+已清理文件/目录（本次）
+
+- ablation_artifacts/ 目录：编译中间产物，体积大且可重建，已删除
+- ablation_raw.json：与ablation_raw.csv信息重叠，已删除
+- ablation_summary.json：与ablation_summary.csv信息重叠，已删除
+- classification_data_notes.md：已并入本索引文件，已删除

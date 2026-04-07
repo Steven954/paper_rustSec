@@ -1,4 +1,5 @@
 **/target/
+results/ablation_artifacts/build/**/incremental/
 **/*.log
 .DS_Store
 tools/Rudra/.cargo-home/
